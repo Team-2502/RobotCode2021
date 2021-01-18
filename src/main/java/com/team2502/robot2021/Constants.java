@@ -29,6 +29,9 @@ public final class Constants {
 
         // Buttons on JOYSTICK_DRIVE_RIGHT
         public static final int BUTTON_SHIFT = 1;
+        public static final int BUTTON_BLUE_ZONE = 2;
+        public static final int BUTTON_YELLOW_ZONE = 3;
+        public static final int BUTTON_RED_ZONE = 4;
 
         // Buttons on JOYSTICK_DRIVE_LEFT
         public static final int BUTTON_VISION_ALIGN = 1;
@@ -109,6 +112,11 @@ public final class Constants {
 
 //          public static final String LIMELIGHT_NETWORK_TABLE = "limelight-acid"; // Practice Bot
             public static final String LIMELIGHT_NETWORK_TABLE = "limelight-orion"; // Comp Bot
+
+            public static final double STANDARD_DISTANCE = 12;
+            public static final double YELLOW_ZONE_DISTANCE = 9.6;
+            public static final double BLUE_ZONE_DISTANCE = 14.6;
+            public static final double RED_ZONE_DISTANCE = 18.5;
         }
 
         public static final class MotorSpeeds {
@@ -178,6 +186,8 @@ public final class Constants {
             HashMap<Double, Double> distToRpmMap = new HashMap<>();
             distToRpmMap.put(10D, 3840D);
             distToRpmMap.put(15D, 3728D);
+            distToRpmMap.put(18D, 3728D);
+            distToRpmMap.put(19D, 3728D);
             distToRpmMap.put(20D, 3735D);
             distToRpmMap.put(21D, 3857D);
             distToRpmMap.put(23D, 3862D);

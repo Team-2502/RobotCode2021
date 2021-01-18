@@ -66,7 +66,17 @@ public class RobotContainer {
     ShiftButton.whenPressed(new ToggleDrivetrainGearCommand(DRIVE_TRAIN));
 
     JoystickButton VisionButton = new JoystickButton(JOYSTICK_DRIVE_LEFT, OI.BUTTON_VISION_ALIGN);
-    VisionButton.whileHeld(new DriveWithVisionAlignCommand(VISION, DRIVE_TRAIN, JOYSTICK_DRIVE_LEFT, JOYSTICK_DRIVE_RIGHT));
+    VisionButton.whileHeld(new DriveWithVisionAlignCommand(VISION, DRIVE_TRAIN, JOYSTICK_DRIVE_LEFT, JOYSTICK_DRIVE_RIGHT, Constants.Robot.Vision.STANDARD_DISTANCE));
+
+    JoystickButton VisionButtonYellow = new JoystickButton(JOYSTICK_DRIVE_RIGHT, OI.BUTTON_YELLOW_ZONE);
+    VisionButtonYellow.whileHeld(new DriveWithVisionAlignCommand(VISION, DRIVE_TRAIN, JOYSTICK_DRIVE_LEFT, JOYSTICK_DRIVE_RIGHT, Constants.Robot.Vision.YELLOW_ZONE_DISTANCE));
+
+    JoystickButton VisionButtonBlue = new JoystickButton(JOYSTICK_DRIVE_RIGHT, OI.BUTTON_BLUE_ZONE);
+    VisionButtonBlue.whileHeld(new DriveWithVisionAlignCommand(VISION, DRIVE_TRAIN, JOYSTICK_DRIVE_LEFT, JOYSTICK_DRIVE_RIGHT, Constants.Robot.Vision.BLUE_ZONE_DISTANCE));
+
+    JoystickButton VisionButtonRed = new JoystickButton(JOYSTICK_DRIVE_RIGHT, OI.BUTTON_RED_ZONE);
+    VisionButtonRed.whileHeld(new DriveWithVisionAlignCommand(VISION, DRIVE_TRAIN, JOYSTICK_DRIVE_LEFT, JOYSTICK_DRIVE_RIGHT, Constants.Robot.Vision.RED_ZONE_DISTANCE));
+
 
     JoystickButton HopperContinuousButton = new JoystickButton(JOYSTICK_OPERATOR, Constants.OI.BUTTON_HOPPER_CONTINUOUS);
     HopperContinuousButton.whileHeld(new RunHopperCommand(HOPPER, SHOOTER, Constants.Robot.MotorSpeeds.HOPPER_LEFT_BELT,
@@ -77,7 +87,7 @@ public class RobotContainer {
             Constants.Robot.MotorSpeeds.HOPPER_RIGHT_BELT_REVERSE, Constants.Robot.MotorSpeeds.HOPPER_EXIT_WHEEL_REVERSE, Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT_REVERSE, false));
 
     JoystickButton RunShooterCloseButton = new JoystickButton(JOYSTICK_OPERATOR, Constants.OI.BUTTON_RUN_SHOOTER_INIT_LINE);
-    RunShooterCloseButton.toggleWhenPressed(new RunShooterCommand(SHOOTER, VISION, Constants.LookupTables.DIST_TO_RPM_TABLE.get(10D)));
+    RunShooterCloseButton.toggleWhenPressed(new RunShooterCommand(SHOOTER, VISION, 3733D));
 
     JoystickButton RunShooterTrenchButton = new JoystickButton(JOYSTICK_OPERATOR, Constants.OI.BUTTON_RUN_SHOOTER_TRENCH);
     RunShooterTrenchButton.toggleWhenPressed(new RunShooterCommand(SHOOTER,VISION , Constants.LookupTables.DIST_TO_RPM_TABLE.get(25D)));

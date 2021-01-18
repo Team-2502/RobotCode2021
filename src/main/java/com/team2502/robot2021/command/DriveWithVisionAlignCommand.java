@@ -14,17 +14,19 @@ public class DriveWithVisionAlignCommand extends CommandBase {
     private final Joystick rightJoystick;
     double leftPower;
     double rightPower;
+    double backOfRange;
 
     private boolean seesTarget;
 
     private double p;
     private double frictionConstant;
 
-    public DriveWithVisionAlignCommand(VisionSubsystem vision_subsystem, DrivetrainSubsystem drive_subsystem, Joystick leftJoystick, Joystick rightJoystick){
+    public DriveWithVisionAlignCommand(VisionSubsystem vision_subsystem, DrivetrainSubsystem drive_subsystem, Joystick leftJoystick, Joystick rightJoystick, double backOfRange){
         vision = vision_subsystem;
         drive = drive_subsystem;
         this.leftJoystick = leftJoystick;
         this.rightJoystick = rightJoystick;
+        this.backOfRange = backOfRange;
         seesTarget = false;
         addRequirements(drive);
     }
@@ -54,10 +56,10 @@ public class DriveWithVisionAlignCommand extends CommandBase {
             double power;
             double userDesiredValue = -(leftJoystick.getY() + rightJoystick.getY()) / 2;
 
-            if(vision.getDistance() < 10) {
+            if(vision.getDistance() < backOfRange - 2) {
                 power = Math.min(-0.2 - frictionConstant, userDesiredValue);
             }
-            else if (10 <= vision.getDistance() && vision.getDistance() <= 12) {
+            else if (backOfRange - 2 <= vision.getDistance() && vision.getDistance() <= backOfRange) {
                 power = Math.min(0, userDesiredValue);
             }
             else {
