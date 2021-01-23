@@ -169,4 +169,100 @@ public class AutonomousCommandGroupFactory {
                 VoltageDriveRaceGroup(drivetrain, 0.8, 0.8, 0.35)
         );
     }
+
+    public static SequentialCommandGroup PATH_A_PICKUP_ALL(DrivetrainSubsystem drivetrain, IntakeSubsystem intake, HopperSubsystem hopper, VisionSubsystem v, ShooterSubsystem shooter) {
+        ParallelRaceGroup intakeWhileMoving = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain, 0.6, 0),
+                new RunIntakeCommand(intake, hopper, Constants.Robot.MotorSpeeds.INTAKE_SPEED_FORWARD, Constants.Robot.MotorSpeeds.INTAKE_SQUEEZE_SPEED_FORWARDS, Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT_INTAKE),
+                new WaitCommand(0.5)
+        );
+
+        ParallelRaceGroup stopAndIntake = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain, 0, 0),
+                new RunIntakeCommand(intake, hopper, Constants.Robot.MotorSpeeds.INTAKE_SPEED_FORWARD, Constants.Robot.MotorSpeeds.INTAKE_SQUEEZE_SPEED_FORWARDS, Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT_INTAKE),
+                new WaitCommand(1.5)
+        );
+
+        ParallelRaceGroup c3BallPickup = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain, 0.6, 0),
+                new WaitCommand(0.3)
+        );
+
+        ParallelRaceGroup d5BallPickupP1 = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain, 0.6, 0),
+                new WaitCommand(0.1)
+        );
+
+        ParallelRaceGroup turnToE6 = new ParallelRaceGroup(
+                new TurnToAngleCommand(drivetrain, 45),
+                new WaitCommand(0.5)
+        );
+
+
+        ParallelRaceGroup e6BallPickup = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain, 0.6, 0),
+                new WaitCommand(0.2)
+        );
+
+        ParallelRaceGroup turnToA6 = new ParallelRaceGroup(
+                new TurnToAngleCommand(drivetrain, 240),
+                new WaitCommand(1.5)
+        );
+
+        ParallelRaceGroup a6BallPickup = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain, 0.6, 0),
+                new WaitCommand(1)
+        );
+
+        ParallelRaceGroup turnToB7 = new ParallelRaceGroup(
+                new TurnToAngleCommand(drivetrain, 30),
+                new WaitCommand(1)
+        );
+
+        ParallelRaceGroup b7BallPickup = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain, 0.6, 0),
+                new WaitCommand(0.3)
+        );
+
+        ParallelRaceGroup c9BallPickupP1 = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain, 0.6, 0),
+                new WaitCommand(0.4)
+        );
+
+        ParallelRaceGroup turnToC9 = new ParallelRaceGroup(
+                new TurnToAngleCommand(drivetrain, 330),
+                new WaitCommand(1)
+        );
+
+        ParallelRaceGroup c9BallPickupP2 = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain, 0.6, 0),
+                new WaitCommand(1)
+        );
+
+        ParallelRaceGroup driveToEnd = new ParallelRaceGroup(
+          new DriveStraightCommand(drivetrain, 0.6, 0),
+          new WaitCommand(1)
+        );
+
+
+        return new SequentialCommandGroup(
+                c3BallPickup,
+                intakeWhileMoving,
+                d5BallPickupP1,
+                intakeWhileMoving,
+                turnToE6,
+                e6BallPickup,
+                stopAndIntake,
+                turnToA6,
+                a6BallPickup,
+                stopAndIntake,
+                turnToB7,
+                b7BallPickup,
+                intakeWhileMoving,
+                c9BallPickupP1,
+                turnToC9,
+                intakeWhileMoving,
+                driveToEnd
+                );
+    }
 }
