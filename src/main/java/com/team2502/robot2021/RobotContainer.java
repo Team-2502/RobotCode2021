@@ -46,7 +46,7 @@ public class RobotContainer {
       DRIVE_TRAIN.setDefaultCommand(new DriveCommand(DRIVE_TRAIN, JOYSTICK_DRIVE_LEFT, JOYSTICK_DRIVE_RIGHT));
 
       AutoSwitcher.putToSmartDashboard();
-      CameraServer.getInstance().startAutomaticCapture();
+      CameraServer.getInstance().startAutomaticCapture("HopperCamera", 0);
   }
 
   private void configureButtonBindings() {
