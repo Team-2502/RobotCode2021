@@ -268,7 +268,7 @@ public class AutonomousCommandGroupFactory {
 
 
     }
-    public static SequentialCommandGroup Galacitc_B_Backup(DrivetrainSubsystem drivetrain, IntakeSubsystem intake, HopperSubsystem hopper, VisionSubsystem v, ShooterSubsystem shooter){
+    public static SequentialCommandGroup Galactic_B_Backup(DrivetrainSubsystem drivetrain, IntakeSubsystem intake, HopperSubsystem hopper, VisionSubsystem v, ShooterSubsystem shooter){
 
         ParallelRaceGroup straightToB3Pickup = new ParallelRaceGroup(
                 new DriveStraightCommand(drivetrain,0.6,0),
