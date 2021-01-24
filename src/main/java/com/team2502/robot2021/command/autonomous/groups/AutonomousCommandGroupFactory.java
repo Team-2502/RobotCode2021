@@ -264,5 +264,92 @@ public class AutonomousCommandGroupFactory {
                 intakeWhileMoving,
                 driveToEnd
                 );
+
+
+
+    }
+    public static SequentialCommandGroup Galacitc_B_Backup(DrivetrainSubsystem drivetrain, IntakeSubsystem intake, HopperSubsystem hopper, VisionSubsystem v, ShooterSubsystem shooter){
+
+        ParallelRaceGroup straightToB3Pickup = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain,0.6,0),
+                new RunIntakeCommand(intake, hopper, Constants.Robot.MotorSpeeds.INTAKE_SPEED_FORWARD, Constants.Robot.MotorSpeeds.INTAKE_SQUEEZE_SPEED_FORWARDS, Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT_INTAKE),
+                new WaitCommand(0.6)
+        );
+
+        ParallelRaceGroup turnToD5 = new ParallelRaceGroup(
+                new TurnToAngleCommand(drivetrain,30),
+                new WaitCommand(1)
+        );
+
+        ParallelRaceGroup straightToD5Pickup = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain,0.6,30),
+                new RunIntakeCommand(intake, hopper, Constants.Robot.MotorSpeeds.INTAKE_SPEED_FORWARD, Constants.Robot.MotorSpeeds.INTAKE_SQUEEZE_SPEED_FORWARDS, Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT_INTAKE),
+                new WaitCommand(0.6)
+        );
+
+        ParallelRaceGroup turnToD6 = new ParallelRaceGroup(
+                new TurnToAngleCommand(drivetrain,0),
+                new WaitCommand(1)
+        );
+
+        ParallelRaceGroup straightToD6Pickup = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain,0.7,0),
+                new RunIntakeCommand(intake, hopper, Constants.Robot.MotorSpeeds.INTAKE_SPEED_FORWARD, Constants.Robot.MotorSpeeds.INTAKE_SQUEEZE_SPEED_FORWARDS, Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT_INTAKE),
+                new WaitCommand(0.4)
+        );
+
+        ParallelRaceGroup turnToB7 = new ParallelRaceGroup(
+                new TurnToAngleCommand(drivetrain,290),
+                new WaitCommand(1)
+        );
+
+        ParallelRaceGroup strightToB7Pickup = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain, 0.6,290),
+                new RunIntakeCommand(intake, hopper, Constants.Robot.MotorSpeeds.INTAKE_SPEED_FORWARD, Constants.Robot.MotorSpeeds.INTAKE_SQUEEZE_SPEED_FORWARDS, Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT_INTAKE),
+                new WaitCommand(0.6)
+        );
+
+        ParallelRaceGroup turnToB8 = new ParallelRaceGroup(
+                new TurnToAngleCommand(drivetrain,0),
+                new WaitCommand(1)
+        );
+
+        ParallelRaceGroup straightToB8Pickup = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain,0.7,0),
+                new RunIntakeCommand(intake, hopper, Constants.Robot.MotorSpeeds.INTAKE_SPEED_FORWARD, Constants.Robot.MotorSpeeds.INTAKE_SQUEEZE_SPEED_FORWARDS, Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT_INTAKE),
+                new WaitCommand(0.4)
+        );
+
+        ParallelRaceGroup turnToD10 = new ParallelRaceGroup(
+                new TurnToAngleCommand(drivetrain,70),
+                new WaitCommand(1)
+        );
+
+        ParallelRaceGroup straightToD10 = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain,0.6,70),
+                new RunIntakeCommand(intake, hopper, Constants.Robot.MotorSpeeds.INTAKE_SPEED_FORWARD, Constants.Robot.MotorSpeeds.INTAKE_SQUEEZE_SPEED_FORWARDS, Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT_INTAKE),
+                new WaitCommand(0.6)
+        );
+
+        ParallelRaceGroup goToEnd = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain,0.6,55),
+                new WaitCommand(0.5)
+        );
+
+        return new SequentialCommandGroup(
+                straightToB3Pickup,
+                turnToD5,
+                straightToD5Pickup,
+                turnToD6,
+                straightToD6Pickup,
+                turnToB7,
+                strightToB7Pickup,
+                turnToB8,
+                straightToB8Pickup,
+                turnToD10,
+                straightToD10,
+                goToEnd
+
+        );
     }
 }
