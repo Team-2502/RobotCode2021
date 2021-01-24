@@ -1,24 +1,29 @@
 {
-    "rightControllerTypes": ["WPI_TalonFX", "WPI_TalonFX"],
-    "leftControllerTypes": ["WPI_TalonFX", "WPI_TalonFX"],
+    "motorPorts": [3,4],
+    "rightMotorPorts": [1,2],
 
-    "leftMotorPorts": [3, 4],
-    "rightMotorPorts": [1, 2],
-    "leftMotorsInverted": [False, False],
+    "controllerTypes": ['WPI_TalonFX', 'WPI_TalonFX'],
+    "rightControllerTypes": ['WPI_TalonFX', 'WPI_TalonFX'],
+
+    "motorsInverted": [False, False],
     "rightMotorsInverted": [False, False],
 
-    # (in meters)
-    "wheelDiameter": 0.1524,
+    # Encoder edges-per-revolution (4x cycles per revolution!)
+    "encoderEPR": 8192,
 
-    # Low Gear
-    "encoderEPR": 257.4628571,
+    # Gearing accounts for the gearing between the encoder and the output shaft
+    "gearing": 0.0611111111,
 
-    "leftEncoderInverted": False,
+    "encoderPorts": [],
+    "rightEncoderPorts": [],
+
+    "encoderInverted": False,
     "rightEncoderInverted": False,
 
     "gyroType": "NavX",
     "gyroPort": "SPI.Port.kMXP",
 }
+
 
 
 
