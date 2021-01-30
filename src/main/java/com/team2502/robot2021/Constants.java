@@ -164,6 +164,10 @@ public final class Constants {
 
             public static final double DRIVE_STRAIGHT_KP = 0.01;
             public static final double TURN_TO_ANGLE_KP = 0.015;
+
+            public static final double KS = 0.629;
+            public static final double KV = 3.68;
+            public static final double KA = 0.32;
         }
     }
 
