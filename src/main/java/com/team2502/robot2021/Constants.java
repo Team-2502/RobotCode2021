@@ -8,6 +8,7 @@
 package com.team2502.robot2021;
 
 import com.team2502.robot2021.util.LookupTable;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 
 import java.util.HashMap;
 
@@ -165,9 +166,21 @@ public final class Constants {
             public static final double DRIVE_STRAIGHT_KP = 0.01;
             public static final double TURN_TO_ANGLE_KP = 0.015;
 
-            public static final double KS = 0.629;
-            public static final double KV = 3.68;
-            public static final double KA = 0.32;
+            public static final double ksVolts = 0.629;
+            public static final double kvVoltSecondsPerMeter = 3.68;
+            public static final double kaVoltSecondsSquaredPerMeter = 0.32;
+
+            public static final double kRamseteB = 2;
+            public static final double kRamseteZeta = 0.7;
+
+            public static final double kMaxSpeedMetersPerSecond = 3;
+            public static final double kMaxAccelerationMetersPerSecondSquared = 3;
+
+            public static final double kTrackwidthMeters = 0.56;
+            public static final DifferentialDriveKinematics kDriveKinematics =
+                    new DifferentialDriveKinematics(kTrackwidthMeters);
+
+            public static final double kPDriveVel = 1.86;
         }
     }
 

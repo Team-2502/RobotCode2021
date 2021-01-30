@@ -1,5 +1,6 @@
 package com.team2502.robot2021.subsystem;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
@@ -12,6 +13,9 @@ import com.team2502.robot2021.Constants.Robot.Auto;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -27,6 +31,9 @@ public class DrivetrainSubsystem extends SubsystemBase {
     private final WPI_TalonFX drivetrainBackLeft;
     private final WPI_TalonFX drivetrainFrontRight;
     private final WPI_TalonFX drivetrainBackRight;
+
+    // Odometry class for tracking robot pose
+    private final DifferentialDriveOdometry m_odometry;
 
     public DrivetrainSubsystem() {
         drivetrainBackLeft = new WPI_TalonFX(Motors.DRIVE_BACK_LEFT);
@@ -52,6 +59,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
         navX = new AHRS(SPI.Port.kMXP);
         resetHeading();
         resetEncoders();
+
+        m_odometry = new DifferentialDriveOdometry(navX.getRotation2d());
 
         drive = new DifferentialDrive(drivetrainFrontLeft, drivetrainFrontRight);
 
@@ -114,12 +123,53 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
     public double getHeading() { return Math.IEEEremainder(navX.getAngle(), 360) * (Constants.Robot.Auto.GYRO_REVERSED ? -1 : 1); }
 
+    public double getTurnRate() { return navX.getRate() * (Constants.Robot.Auto.GYRO_REVERSED ? -1 : 1); }
+
+
+    /**
+     * Returns the currently-estimated pose of the robot.
+     *
+     * @return The pose.
+     */
+    public Pose2d getPose() {
+        return m_odometry.getPoseMeters();
+    }
+
+    /**
+     * Returns the current wheel speeds of the robot.
+     *
+     * @return The current wheel speeds.
+     */
+    public DifferentialDriveWheelSpeeds getWheelSpeeds() {
+        return new DifferentialDriveWheelSpeeds(getLeftEncoderSpeed(drivetrainFrontLeft, false), getRightEncoderSpeed(drivetrainFrontRight, false));
+    }
+
+
     public void resetHeading(){
         navX.reset();
     }
 
+    /**
+     * Resets the odometry to the specified pose.
+     *
+     * @param pose The pose to which to set the odometry.
+     */
+    public void resetOdometry(Pose2d pose) {
+        resetEncoders();
+        m_odometry.resetPosition(pose, navX.getRotation2d());
+    }
+
+    public void tankDriveVolts(double leftVolts, double rightVolts) {
+        drivetrainFrontLeft.set(ControlMode.PercentOutput, leftVolts/12);
+        drivetrainFrontLeft.set(ControlMode.PercentOutput, rightVolts/12);
+    }
+
     @Override
     public void periodic() {
+        // Update the odometry in the periodic block
+        m_odometry.update(navX.getRotation2d(), getLeftEncoderPosition(drivetrainFrontLeft, false),
+                getRightEncoderPosition(drivetrainFrontRight, false));
+
         SmartDashboard.putNumber("Left Front Position", getLeftEncoderPosition(drivetrainFrontLeft, isHighGear()));
         SmartDashboard.putNumber("Right Front Position", getRightEncoderPosition(drivetrainFrontRight, isHighGear()));
         SmartDashboard.putNumber("Left Back Position", getLeftEncoderPosition(drivetrainBackLeft, isHighGear()));
