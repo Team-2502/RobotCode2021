@@ -144,6 +144,19 @@ public final class Constants {
         }
 
         public static final class Auto {
+            public static final double WHEEL_DIAMETER = 0.1524;
+
+            public static final int ENCODER_CPR = 2048;
+            public static final double ENCODER_CONVERSION_HIGH = (11f * 24f) / (42f * 50f);
+            public static final double ENCODER_CONVERSION_LOW = (11f * 14f) / (42f * 60f);
+
+//            public static final double ENCODER_DPP_HIGH = (WHEEL_DIAMETER * Math.PI) / ((double) ENCODER_CPR * ENCODER_CONVERSION_HIGH);
+//            public static final double ENCODER_DPP_LOW = (WHEEL_DIAMETER * Math.PI) / ((double) ENCODER_CPR * ENCODER_CONVERSION_LOW);
+
+            // Units: meters / enc units
+            public static final double ENCODER_DPP_HIGH = 2.84189006248405e-5;
+            public static final double ENCODER_DPP_LOW = 1.369566308404673e-5;
+
             public static final boolean GYRO_REVERSED = true;
 
             public static final double TURN_TOLERANCE_DEG = 1;
