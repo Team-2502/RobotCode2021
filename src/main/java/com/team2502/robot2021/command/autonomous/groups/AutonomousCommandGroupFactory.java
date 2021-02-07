@@ -352,4 +352,33 @@ public class AutonomousCommandGroupFactory {
 
         );
     }
+
+    public static SequentialCommandGroup GalacticSearchRedA(DrivetrainSubsystem drivetrain, IntakeSubsystem intake, HopperSubsystem hopper, VisionSubsystem v, ShooterSubsystem shooter) {
+        ParallelRaceGroup DriveStraightC3 = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain, 1, 0),
+                new RunIntakeCommand(intake, hopper, Constants.Robot.MotorSpeeds.INTAKE_SPEED_FORWARD, Constants.Robot.MotorSpeeds.INTAKE_SQUEEZE_SPEED_FORWARDS, Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT_INTAKE),
+                new WaitCommand(0.5)
+        );
+        ParallelRaceGroup MoveToD5 = new ParallelRaceGroup(
+                new VoltageDriveCommand(drivetrain, 1, 0.8),
+                new RunIntakeCommand(intake, hopper, Constants.Robot.MotorSpeeds.INTAKE_SPEED_FORWARD, Constants.Robot.MotorSpeeds.INTAKE_SQUEEZE_SPEED_FORWARDS, Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT_INTAKE),
+                new WaitCommand(0.7)
+        );
+        ParallelRaceGroup DriveStraightA6 = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain, 1, 45),
+                new RunIntakeCommand(intake, hopper, Constants.Robot.MotorSpeeds.INTAKE_SPEED_FORWARD, Constants.Robot.MotorSpeeds.INTAKE_SQUEEZE_SPEED_FORWARDS, Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT_INTAKE),
+                new WaitCommand(1)
+        );
+        ParallelRaceGroup MoveHome = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain, 1, 0),
+                new WaitCommand(1.5)
+        );
+
+        return new SequentialCommandGroup(
+                DriveStraightC3,
+                MoveToD5,
+                DriveStraightA6,
+                MoveHome
+        );
+    }
 }

@@ -49,6 +49,7 @@ public class AutoSwitcher {
      */
     public enum AutoMode
     {
+        GALACTIC_SEARCH_RED_A("Pick up balls in path A for Red", AutonomousCommandGroupFactory::GalacticSearchRedA),
         SIMPLE_SHOOT_3_BACKWARDS("Shoot 3 Center and Back Up", AutonomousCommandGroupFactory::SIMPLE_SHOOT_3_BACKWARDS),
         SIMPLE_SHOOT_3_FORWARDS("Shoot 3 Center and Go Forwards", AutonomousCommandGroupFactory::SIMPLE_SHOOT_3_FORWARDS),
         TRENCH_6_BALL_AUTO("Start Right Trench 6 Ball", AutonomousCommandGroupFactory::TRENCH_6_BALL_AUTO),
@@ -58,7 +59,7 @@ public class AutoSwitcher {
         TEST_DRIVE_STRAIGHT((d, i, h, v, s) -> new SequentialCommandGroup(
                 new TurnToAngleCommand(d, 180),
                 new DriveStraightCommand(d, 0.5))),
-        TEST_TURN((d,i,h,v,s) -> new TurnToAngleCommand(d, 22d)),
+        TEST_TURN((d,i,h,v,s) -> new TurnToAngleCommand(d, 80d)),
         TEST_FRICTION((d,i,h,v,s) -> new SequentialCommandGroup(new VoltageDriveCommand(d, -0.29, 0.29))),
         DO_NOTHING("Do Nothing", DoNothingCommand::new); // always put last
 
