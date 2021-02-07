@@ -166,9 +166,9 @@ public final class Constants {
             public static final double DRIVE_STRAIGHT_KP = 0.01;
             public static final double TURN_TO_ANGLE_KP = 0.015;
 
-            public static final double ksVolts = 0.629;
-            public static final double kvVoltSecondsPerMeter = 3.68;
-            public static final double kaVoltSecondsSquaredPerMeter = 0.32;
+            public static final double ksVolts = 0.569;
+            public static final double kvVoltSecondsPerMeter = 3.62;
+            public static final double kaVoltSecondsSquaredPerMeter = 0.323;
 
             public static final double kRamseteB = 2;
             public static final double kRamseteZeta = 0.7;
@@ -176,11 +176,11 @@ public final class Constants {
             public static final double kMaxSpeedMetersPerSecond = 3;
             public static final double kMaxAccelerationMetersPerSecondSquared = 3;
 
-            public static final double kTrackwidthMeters = 0.56;
+            public static final double kTrackwidthMeters = 1.455;
             public static final DifferentialDriveKinematics kDriveKinematics =
                     new DifferentialDriveKinematics(kTrackwidthMeters);
 
-            public static final double kPDriveVel = 1.86;
+            public static final double kPDriveVel = 1.89;
         }
     }
 
