@@ -421,6 +421,7 @@ public class AutonomousCommandGroupFactory {
                 turn1,
                 secondServe
         );
+    }
 
     public static SequentialCommandGroup GalacticSearchRedA(DrivetrainSubsystem drivetrain, IntakeSubsystem intake, HopperSubsystem hopper, VisionSubsystem v, ShooterSubsystem shooter) {
         ParallelRaceGroup DriveStraightC3 = new ParallelRaceGroup(
