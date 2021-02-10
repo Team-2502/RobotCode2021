@@ -394,6 +394,34 @@ public class AutonomousCommandGroupFactory {
         );
     }
 
+    public static SequentialCommandGroup GalacticSearchRedB(DrivetrainSubsystem drivetrain, IntakeSubsystem intake, HopperSubsystem hopper, VisionSubsystem v, ShooterSubsystem shooter){
+        ParallelRaceGroup firstServe = new ParallelRaceGroup(
+                new VoltageDriveCommand(drivetrain, 0.8, 1),
+                new RunIntakeCommand(intake, hopper, Constants.Robot.MotorSpeeds.INTAKE_SPEED_FORWARD, Constants.Robot.MotorSpeeds.INTAKE_SQUEEZE_SPEED_FORWARDS, Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT_INTAKE),
+                new WaitCommand(0.7)
+        );
+
+        ParallelRaceGroup turn1 = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain, 1, -30),
+                new WaitCommand(1.0)
+        );
+
+        ParallelRaceGroup secondServe = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain, 1, 40),
+                new RunIntakeCommand(intake, hopper, Constants.Robot.MotorSpeeds.INTAKE_SPEED_FORWARD, Constants.Robot.MotorSpeeds.INTAKE_SQUEEZE_SPEED_FORWARDS, Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT_INTAKE),
+                new WaitCommand(0.8)
+        );
+
+//        ParallelRaceGroup turn2 = new ParallelRaceGroup(
+//                new TurnToAngleCommand(drivetrain, 180),
+//                new WaitCommand(1.0)
+//        );
+        return new SequentialCommandGroup(
+                firstServe,
+                turn1,
+                secondServe
+        );
+
     public static SequentialCommandGroup GalacticSearchRedA(DrivetrainSubsystem drivetrain, IntakeSubsystem intake, HopperSubsystem hopper, VisionSubsystem v, ShooterSubsystem shooter) {
         ParallelRaceGroup DriveStraightC3 = new ParallelRaceGroup(
                 new DriveStraightCommand(drivetrain, 1, 0),
