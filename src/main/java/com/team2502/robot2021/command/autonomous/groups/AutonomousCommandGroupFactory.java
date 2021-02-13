@@ -39,44 +39,46 @@ public class AutonomousCommandGroupFactory {
         return new SequentialCommandGroup(drive);
     }
 
-    public static SequentialCommandGroup BARREL_RACING(DrivetrainSubsystem drivetrain, IntakeSubsystem intake, HopperSubsystem hopper, VisionSubsystem vision, ShooterSubsystem shooter) {
-        ParallelRaceGroup ForwardStartZone = new ParallelRaceGroup(
+    public static SequentialCommandGroup BARREL_RACING_LOW(DrivetrainSubsystem drivetrain, IntakeSubsystem intake, HopperSubsystem hopper, VisionSubsystem vision, ShooterSubsystem shooter) {
+        // 12.43 Chris
+        ParallelRaceGroup ForwardFromStartZone = new ParallelRaceGroup(
                 new DriveStraightCommand(drivetrain, 1.0, 0),
                 new WaitCommand(1.0)
         );
-        ParallelRaceGroup TurnLeft = new ParallelRaceGroup(
+        ParallelRaceGroup TurnAroundPoint1 = new ParallelRaceGroup(
                 new VoltageDriveCommand(drivetrain, 1.0, 0.6),
                 new WaitCommand(3.0)
         );
-        ParallelRaceGroup Straight = new ParallelRaceGroup(
+        ParallelRaceGroup StraightToSecondPoint = new ParallelRaceGroup(
                 new DriveStraightCommand(drivetrain, 1.0, 0),
-                new WaitCommand(1.0)
+                new WaitCommand(0.90)
         );
-        ParallelRaceGroup TurnRight = new ParallelRaceGroup(
+        ParallelRaceGroup TurnLeftAroundPoint2 = new ParallelRaceGroup(
                 new VoltageDriveCommand(drivetrain, 0.6, 1.0),
-                new WaitCommand(0.5)
+                new WaitCommand(2.75)
         );
-        ParallelRaceGroup Straight2 = new ParallelRaceGroup(
-                new VoltageDriveCommand(drivetrain, 1.0, 1.0),
-                new WaitCommand(0.25)
+        ParallelRaceGroup StraightToThirdPoint = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain, 1.0, -45), // -50
+                new WaitCommand(0.75)
         );
-        ParallelRaceGroup MoveLeft = new ParallelRaceGroup(
+        ParallelRaceGroup TurnAroundThirdPoint = new ParallelRaceGroup(
                 new VoltageDriveCommand(drivetrain, 0.6, 1.0),
-                new WaitCommand(3.0)
+                new WaitCommand(2)
         );
-        ParallelRaceGroup BackToStartZone = new ParallelRaceGroup(
-                new DriveStraightCommand(drivetrain, 1.0, 0),
-                new WaitCommand(3.0)
+        ParallelRaceGroup StraightBackToStartZone = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain, 1.0, 180),
+                new WaitCommand(1.5)
         );
 
         return new SequentialCommandGroup(
-                ForwardStartZone,
-                TurnLeft,
-                Straight,
-                TurnRight,
-                Straight2,
-                MoveLeft
-                //BackToStartZone
+                ForwardFromStartZone,
+                TurnAroundPoint1,
+                StraightToSecondPoint,
+                TurnLeftAroundPoint2,
+                StraightToThirdPoint,
+                TurnAroundThirdPoint,
+                new ToggleDrivetrainGearCommand(drivetrain),
+                StraightBackToStartZone
         );
     }
 

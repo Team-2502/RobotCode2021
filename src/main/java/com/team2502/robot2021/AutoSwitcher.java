@@ -57,11 +57,11 @@ public class AutoSwitcher {
         LEFT_START_RENDEZVOUS_4_BALL("Start Left Rendezvous 4 Ball", AutonomousCommandGroupFactory::LEFT_START_RENDEZVOUS_4_BALL),
         PATH_A_PICKUP_ALL("Path A Pickup All Balls", AutonomousCommandGroupFactory::PATH_A_PICKUP_ALL),
         GALACTIC_B_BACKUP("Pick up all balls in path B",AutonomousCommandGroupFactory::Galactic_B_Backup),
-        BARREL_RACING("Barrel Racing Path", AutonomousCommandGroupFactory::BARREL_RACING),
+        BARREL_RACING("Barrel Racing Path", AutonomousCommandGroupFactory::BARREL_RACING_LOW),
         TEST_DRIVE_STRAIGHT((d, i, h, v, s) -> new SequentialCommandGroup(
                 new TurnToAngleCommand(d, 180),
                 new DriveStraightCommand(d, 0.5))),
-        TEST_TURN((d,i,h,v,s) -> new TurnToAngleCommand(d, 80d)),
+        TEST_TURN((d,i,h,v,s) -> new TurnToAngleCommand(d, -55d)),
         TEST_FRICTION((d,i,h,v,s) -> new SequentialCommandGroup(new VoltageDriveCommand(d, -0.29, 0.29))),
         DO_NOTHING("Do Nothing", DoNothingCommand::new); // always put last
 
