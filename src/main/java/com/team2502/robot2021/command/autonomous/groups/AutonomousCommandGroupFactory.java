@@ -82,6 +82,53 @@ public class AutonomousCommandGroupFactory {
         );
     }
 
+    public static SequentialCommandGroup BARREL_RACING_HIGH(DrivetrainSubsystem drivetrain, IntakeSubsystem intake, HopperSubsystem hopper, VisionSubsystem vision, ShooterSubsystem shooter) {
+        // 12.43 Chris
+        ParallelRaceGroup ForwardFromStartZone = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain, 1.0, 8),
+                new WaitCommand(0.92)
+        );
+        ParallelRaceGroup TurnAroundPoint1 = new ParallelRaceGroup(
+                new VoltageDriveCommand(drivetrain, 1.0, 0.5),
+                new WaitCommand(2.0)
+        );
+        ParallelRaceGroup StraightToSecondPoint = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain, 1.0, 0),
+                new WaitCommand(0.60)
+        );
+        ParallelRaceGroup TurnLeftAroundPoint2 = new ParallelRaceGroup(
+                new VoltageDriveCommand(drivetrain, 0.6, 1.0),
+                new WaitCommand(2.75)
+        );
+        ParallelRaceGroup StraightToThirdPoint = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain, 1.0, -45), // -50
+                new WaitCommand(0.3)
+        );
+        ParallelRaceGroup TurnAroundThirdPoint = new ParallelRaceGroup(
+                new VoltageDriveCommand(drivetrain, 0.6, 1.0),
+                new WaitCommand(2)
+        );
+        ParallelRaceGroup StraightBackToStartZone = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain, 1.0, 180),
+                new WaitCommand(1.5)
+        );
+
+        return new SequentialCommandGroup(
+                new ToggleDrivetrainGearCommand(drivetrain),
+                ForwardFromStartZone,
+                TurnAroundPoint1,
+                StraightToSecondPoint
+//                new ToggleDrivetrainGearCommand(drivetrain),
+//                TurnLeftAroundPoint2,
+//                new ToggleDrivetrainGearCommand(drivetrain),
+//                StraightToThirdPoint,
+//                new ToggleDrivetrainGearCommand(drivetrain),
+//                TurnAroundThirdPoint,
+//                new ToggleDrivetrainGearCommand(drivetrain),
+//                StraightBackToStartZone
+        );
+    }
+
     public static SequentialCommandGroup LEFT_START_RENDEZVOUS_4_BALL(DrivetrainSubsystem drivetrain, IntakeSubsystem intake, HopperSubsystem hopper, VisionSubsystem v, ShooterSubsystem shooter) {
 
         ParallelRaceGroup driveBackFromInitLine = new ParallelRaceGroup(
