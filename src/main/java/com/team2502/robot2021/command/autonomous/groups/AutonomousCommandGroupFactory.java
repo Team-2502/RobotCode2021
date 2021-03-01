@@ -531,14 +531,14 @@ public class AutonomousCommandGroupFactory {
                 new WaitCommand(0.5)
         );
         ParallelRaceGroup MoveToD5 = new ParallelRaceGroup(
-                new VoltageDriveCommand(drivetrain, 1, 0.8),
+                new VoltageDriveCommand(drivetrain, 1, 0.75),
                 new RunIntakeCommand(intake, hopper, Constants.Robot.MotorSpeeds.INTAKE_SPEED_FORWARD, Constants.Robot.MotorSpeeds.INTAKE_SQUEEZE_SPEED_FORWARDS, Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT_INTAKE),
                 new WaitCommand(0.7)
         );
         ParallelRaceGroup DriveStraightA6 = new ParallelRaceGroup(
-                new DriveStraightCommand(drivetrain, 1, 45),
+                new DriveStraightCommand(drivetrain, 1, 60),
                 new RunIntakeCommand(intake, hopper, Constants.Robot.MotorSpeeds.INTAKE_SPEED_FORWARD, Constants.Robot.MotorSpeeds.INTAKE_SQUEEZE_SPEED_FORWARDS, Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT_INTAKE),
-                new WaitCommand(1)
+                new WaitCommand(1.6)
         );
         ParallelRaceGroup MoveHome = new ParallelRaceGroup(
                 new DriveStraightCommand(drivetrain, 1, 0),
