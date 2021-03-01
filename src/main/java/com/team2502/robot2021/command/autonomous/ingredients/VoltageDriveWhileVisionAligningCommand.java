@@ -75,6 +75,6 @@ public class VoltageDriveWhileVisionAligningCommand extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return !seesTarget;
+        return false;
     }
 }
