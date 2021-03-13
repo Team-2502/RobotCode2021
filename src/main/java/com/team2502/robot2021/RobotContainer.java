@@ -8,11 +8,14 @@
 package com.team2502.robot2021;
 
 import com.team2502.robot2021.command.*;
+import com.team2502.robot2021.command.autonomous.groups.AutonomousCommandGroupFactory;
 import com.team2502.robot2021.subsystem.*;
 import com.team2502.robot2021.Constants.OI;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -36,6 +39,8 @@ public class RobotContainer {
   private static final Joystick JOYSTICK_DRIVE_LEFT = new Joystick(Constants.OI.JOYSTICK_DRIVE_LEFT);
   private static final Joystick JOYSTICK_OPERATOR = new Joystick(Constants.OI.JOYSTICK_OPERATOR);
 
+  private final SendableChooser<Boolean> GALACTIC_SEARCH_CHOOSER = new SendableChooser<>();
+  protected int AUTO_PATH = 0;
 
     /**
      * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -44,6 +49,12 @@ public class RobotContainer {
       configureButtonBindings();
 
       DRIVE_TRAIN.setDefaultCommand(new DriveCommand(DRIVE_TRAIN, JOYSTICK_DRIVE_LEFT, JOYSTICK_DRIVE_RIGHT));
+
+      GALACTIC_SEARCH_CHOOSER.addOption("Run Galactic Search Path", true);
+      GALACTIC_SEARCH_CHOOSER.setDefaultOption("Use Auto Dropdown", false);
+
+      // Put the chooser on the dashboard
+      SmartDashboard.putData(GALACTIC_SEARCH_CHOOSER);
 
       AutoSwitcher.putToSmartDashboard();
       CameraServer.getInstance().startAutomaticCapture("HopperCamera", 0);
@@ -106,6 +117,15 @@ public class RobotContainer {
   }
 
   public Command getAutonomousRoutine() {
+      if(GALACTIC_SEARCH_CHOOSER.getSelected()) {
+        if (AUTO_PATH == 1) {
+          return AutonomousCommandGroupFactory.GalacticSearchRedA(DRIVE_TRAIN, INTAKE, HOPPER, VISION, SHOOTER);
+        }
+        if (AUTO_PATH == 3) {
+          return AutonomousCommandGroupFactory.GalacticSearchRedB(DRIVE_TRAIN, INTAKE, HOPPER, VISION, SHOOTER);
+        }
+      }
+
       return AutoSwitcher.getAutoInstance().getInstance(
               DRIVE_TRAIN,
               INTAKE,

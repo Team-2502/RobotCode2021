@@ -7,7 +7,10 @@
 
 package com.team2502.robot2021;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -20,6 +23,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 public class Robot extends TimedRobot {
 
   public static RobotContainer ROBOT_CONTAINER;
+  public static NetworkTable SMART_DASHBOARD;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -66,6 +70,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+    SMART_DASHBOARD = NetworkTableInstance.getDefault().getTable("SmartDashboard");
+    ROBOT_CONTAINER.AUTO_PATH = SMART_DASHBOARD.getEntry("Path Number").getNumber(0).intValue();
+
     ROBOT_CONTAINER.DRIVE_TRAIN.resetHeading();
     ROBOT_CONTAINER.VISION.limeLightOn();
     Command autonomousRoutine = ROBOT_CONTAINER.getAutonomousRoutine();

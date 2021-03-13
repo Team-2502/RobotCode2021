@@ -291,7 +291,6 @@ public class AutonomousCommandGroupFactory {
                 driveThroughTrench,
                 stopAndIntake,
                 TurnToTarget,
-                //VisionAlignment,
                 runHopperAndShootBallsAligning
         );
     }
