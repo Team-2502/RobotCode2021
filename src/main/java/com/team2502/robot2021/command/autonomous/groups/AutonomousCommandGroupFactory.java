@@ -357,12 +357,12 @@ public class AutonomousCommandGroupFactory {
         ParallelRaceGroup firstServe = new ParallelRaceGroup(
                 new VoltageDriveCommand(drivetrain, 0.8, 1),
                 new RunIntakeCommand(intake, hopper, Constants.Robot.MotorSpeeds.INTAKE_SPEED_FORWARD, Constants.Robot.MotorSpeeds.INTAKE_SQUEEZE_SPEED_FORWARDS, Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT_INTAKE),
-                new WaitCommand(0.7)
+                new WaitCommand(0.77)
         );
 
         ParallelRaceGroup turn1 = new ParallelRaceGroup(
-                new DriveStraightCommand(drivetrain, 1, -30),
-                new WaitCommand(1.0)
+                new DriveStraightCommand(drivetrain, 1, -50),
+                new WaitCommand(1.2)
         );
 
         ParallelRaceGroup secondServe = new ParallelRaceGroup(
@@ -386,6 +386,37 @@ public class AutonomousCommandGroupFactory {
                 turn1,
                 secondServe,
                 finish
+        );
+    }
+
+    public static SequentialCommandGroup GalacticSearchBlueA(DrivetrainSubsystem drivetrain, IntakeSubsystem intake, HopperSubsystem hopper, VisionSubsystem v, ShooterSubsystem shooter){
+        ParallelRaceGroup driveStraight1 = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain, 1, -15),
+                new RunIntakeCommand(intake, hopper, Constants.Robot.MotorSpeeds.INTAKE_SPEED_FORWARD, Constants.Robot.MotorSpeeds.INTAKE_SQUEEZE_SPEED_FORWARDS, Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT_INTAKE),
+                new WaitCommand(2)
+        );
+
+        ParallelRaceGroup driveStraight2 = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain, 1, 85),
+                new RunIntakeCommand(intake, hopper, Constants.Robot.MotorSpeeds.INTAKE_SPEED_FORWARD, Constants.Robot.MotorSpeeds.INTAKE_SQUEEZE_SPEED_FORWARDS, Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT_INTAKE),
+                new WaitCommand(1.2)
+        );
+
+        ParallelRaceGroup driveStraight3 = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain, 1, -20),
+                new RunIntakeCommand(intake, hopper, Constants.Robot.MotorSpeeds.INTAKE_SPEED_FORWARD, Constants.Robot.MotorSpeeds.INTAKE_SQUEEZE_SPEED_FORWARDS, Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT_INTAKE),
+                new WaitCommand(1.2)
+        );
+
+//        ParallelRaceGroup finish = new ParallelRaceGroup(
+//                new DriveStraightCommand(drivetrain, 1, 0),
+//                new WaitCommand(1.5)
+//        );
+
+        return new SequentialCommandGroup(
+                driveStraight1,
+                driveStraight2,
+                driveStraight3
         );
     }
 }
