@@ -5,6 +5,7 @@ import com.team2502.robot2021.Constants;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -12,6 +13,8 @@ import static com.team2502.robot2021.Constants.Robot.Vision.LIMELIGHT_NETWORK_TA
 
 public class VisionSubsystem extends SubsystemBase {
     private final NetworkTable limelight;
+    private final NetworkTable smartDashboard;
+    private final SendableChooser<Boolean> galacticSearchChooser = new SendableChooser<>();
 
     private double tX;
     private double tY;
@@ -19,6 +22,11 @@ public class VisionSubsystem extends SubsystemBase {
 
     public VisionSubsystem() {
         limelight = NetworkTableInstance.getDefault().getTable(LIMELIGHT_NETWORK_TABLE);
+        smartDashboard = NetworkTableInstance.getDefault().getTable("SmartDashboard");
+
+        galacticSearchChooser.addOption("Run Galactic Search Path", true);
+        galacticSearchChooser.setDefaultOption("Use Auto Dropdown", false);
+        SmartDashboard.putData("Galactic Search Toggle", galacticSearchChooser);
     }
 
     @Override
@@ -44,6 +52,10 @@ public class VisionSubsystem extends SubsystemBase {
     public double getArea(){
         return area;
     }
+
+    public int getGalacticSearchPath(){ return smartDashboard.getEntry("Path Number").getNumber(0).intValue(); }
+
+    public boolean getGalacticSearchToggledOn() { return galacticSearchChooser.getSelected(); }
 
     public void limeLightOff(){
         limelight.getEntry("ledMode").setNumber(1);

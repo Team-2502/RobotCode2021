@@ -2,10 +2,7 @@ package com.team2502.robot2021;
 
 import com.team2502.robot2021.command.autonomous.CommandFactory;
 import com.team2502.robot2021.command.autonomous.groups.AutonomousCommandGroupFactory;
-import com.team2502.robot2021.command.autonomous.ingredients.DoNothingCommand;
-import com.team2502.robot2021.command.autonomous.ingredients.DriveStraightCommand;
-import com.team2502.robot2021.command.autonomous.ingredients.TurnToAngleCommand;
-import com.team2502.robot2021.command.autonomous.ingredients.VoltageDriveCommand;
+import com.team2502.robot2021.command.autonomous.ingredients.*;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -50,16 +47,22 @@ public class AutoSwitcher {
     public enum AutoMode
     {
         GALACTIC_SEARCH_RED_B("Pick up balls in path B for Red", AutonomousCommandGroupFactory::GalacticSearchRedB),
+        GALACTIC_SEARCH_RED_A("Pick up balls in path A for Red", AutonomousCommandGroupFactory::GalacticSearchRedA),
+        GALACTIC_SEARCH_BLUE_B("Pick up balls in path A for Red", AutonomousCommandGroupFactory::GalacticSearchBlueB),
         SIMPLE_SHOOT_3_BACKWARDS("Shoot 3 Center and Back Up", AutonomousCommandGroupFactory::SIMPLE_SHOOT_3_BACKWARDS),
         SIMPLE_SHOOT_3_FORWARDS("Shoot 3 Center and Go Forwards", AutonomousCommandGroupFactory::SIMPLE_SHOOT_3_FORWARDS),
         TRENCH_6_BALL_AUTO("Start Right Trench 6 Ball", AutonomousCommandGroupFactory::TRENCH_6_BALL_AUTO),
         LEFT_START_RENDEZVOUS_4_BALL("Start Left Rendezvous 4 Ball", AutonomousCommandGroupFactory::LEFT_START_RENDEZVOUS_4_BALL),
         PATH_A_PICKUP_ALL("Path A Pickup All Balls", AutonomousCommandGroupFactory::PATH_A_PICKUP_ALL),
         GALACTIC_B_BACKUP("Pick up all balls in path B",AutonomousCommandGroupFactory::Galactic_B_Backup),
+        BARREL_RACING("Barrel Racing Path Low", AutonomousCommandGroupFactory::BARREL_RACING_LOW),
+        SLALOM("Slalom Path", AutonomousCommandGroupFactory::SLALOM_PATH),
+        BARREL_RACING_HIGH("Barrel Racing Path High", AutonomousCommandGroupFactory::BARREL_RACING_HIGH),
         TEST_DRIVE_STRAIGHT((d, i, h, v, s) -> new SequentialCommandGroup(
                 new TurnToAngleCommand(d, 180),
                 new DriveStraightCommand(d, 0.5))),
-        TEST_TURN((d,i,h,v,s) -> new TurnToAngleCommand(d, 22d)),
+        TEST_TURN((d,i,h,v,s) -> new TurnToAngleCommand(d, 179d)),
+        TEST_DRIVE_VISION_AUTO((d,i,h,v,s) -> new VoltageDriveWhileVisionAligningCommand(v,d,0)),
         TEST_FRICTION((d,i,h,v,s) -> new SequentialCommandGroup(new VoltageDriveCommand(d, -0.29, 0.29))),
         DO_NOTHING("Do Nothing", DoNothingCommand::new); // always put last
 

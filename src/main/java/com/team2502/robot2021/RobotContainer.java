@@ -8,6 +8,7 @@
 package com.team2502.robot2021;
 
 import com.team2502.robot2021.command.*;
+import com.team2502.robot2021.command.autonomous.groups.AutonomousCommandGroupFactory;
 import com.team2502.robot2021.subsystem.*;
 import com.team2502.robot2021.Constants.OI;
 
@@ -36,17 +37,16 @@ public class RobotContainer {
   private static final Joystick JOYSTICK_DRIVE_LEFT = new Joystick(Constants.OI.JOYSTICK_DRIVE_LEFT);
   private static final Joystick JOYSTICK_OPERATOR = new Joystick(Constants.OI.JOYSTICK_OPERATOR);
 
-
     /**
      * The container for the robot.  Contains subsystems, OI devices, and commands.
      */
-    public RobotContainer() {
-      configureButtonBindings();
+  public RobotContainer() {
+    configureButtonBindings();
 
-      DRIVE_TRAIN.setDefaultCommand(new DriveCommand(DRIVE_TRAIN, JOYSTICK_DRIVE_LEFT, JOYSTICK_DRIVE_RIGHT));
+    DRIVE_TRAIN.setDefaultCommand(new DriveCommand(DRIVE_TRAIN, JOYSTICK_DRIVE_LEFT, JOYSTICK_DRIVE_RIGHT));
 
-      AutoSwitcher.putToSmartDashboard();
-      CameraServer.getInstance().startAutomaticCapture("HopperCamera", 0);
+    AutoSwitcher.putToSmartDashboard();
+    CameraServer.getInstance().startAutomaticCapture("HopperCamera", 0);
   }
 
   private void configureButtonBindings() {
@@ -106,12 +106,27 @@ public class RobotContainer {
   }
 
   public Command getAutonomousRoutine() {
-      return AutoSwitcher.getAutoInstance().getInstance(
-              DRIVE_TRAIN,
-              INTAKE,
-              HOPPER,
-              VISION,
-              SHOOTER
+    if(VISION.getGalacticSearchToggledOn()) {
+      if (VISION.getGalacticSearchPath() == 1) {
+        return AutonomousCommandGroupFactory.GalacticSearchRedA(DRIVE_TRAIN, INTAKE, HOPPER, VISION, SHOOTER);
+      }
+      if (VISION.getGalacticSearchPath() == 3) {
+        return AutonomousCommandGroupFactory.GalacticSearchRedB(DRIVE_TRAIN, INTAKE, HOPPER, VISION, SHOOTER);
+      }
+      if (VISION.getGalacticSearchPath() == 4) {
+        return AutonomousCommandGroupFactory.GalacticSearchBlueB(DRIVE_TRAIN, INTAKE, HOPPER, VISION, SHOOTER);
+      }
+      if (VISION.getGalacticSearchPath() == 2) {
+        return AutonomousCommandGroupFactory.GalacticSearchRedB(DRIVE_TRAIN, INTAKE, HOPPER, VISION, SHOOTER);
+      }
+    }
+
+    return AutoSwitcher.getAutoInstance().getInstance(
+      DRIVE_TRAIN,
+      INTAKE,
+      HOPPER,
+      VISION,
+      SHOOTER
       );
   }
 }
