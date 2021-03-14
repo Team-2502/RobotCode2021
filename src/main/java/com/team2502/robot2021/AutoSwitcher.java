@@ -51,6 +51,7 @@ public class AutoSwitcher {
     {
         GALACTIC_SEARCH_RED_B("Pick up balls in path B for Red", AutonomousCommandGroupFactory::GalacticSearchRedB),
         GALACTIC_SEARCH_RED_A("Pick up balls in path A for Red", AutonomousCommandGroupFactory::GalacticSearchRedA),
+        GALACTIC_SEARCH_BLUE_B("Pick up balls in path A for Red", AutonomousCommandGroupFactory::GalacticSearchBlueB),
         SIMPLE_SHOOT_3_BACKWARDS("Shoot 3 Center and Back Up", AutonomousCommandGroupFactory::SIMPLE_SHOOT_3_BACKWARDS),
         SIMPLE_SHOOT_3_FORWARDS("Shoot 3 Center and Go Forwards", AutonomousCommandGroupFactory::SIMPLE_SHOOT_3_FORWARDS),
         TRENCH_6_BALL_AUTO("Start Right Trench 6 Ball", AutonomousCommandGroupFactory::TRENCH_6_BALL_AUTO),

@@ -500,4 +500,28 @@ public class AutonomousCommandGroupFactory {
                 MoveHome
         );
     }
+    public static SequentialCommandGroup GalacticSearchBlueB(DrivetrainSubsystem drivetrain, IntakeSubsystem intake, HopperSubsystem hopper, VisionSubsystem v, ShooterSubsystem shooter) {
+        ParallelRaceGroup DriveToD6 = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain, 1, -8),
+                new RunIntakeCommand(intake, hopper, Constants.Robot.MotorSpeeds.INTAKE_SPEED_FORWARD, Constants.Robot.MotorSpeeds.INTAKE_SQUEEZE_SPEED_FORWARDS, Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT_INTAKE),
+                new WaitCommand(3)
+        );
+        ParallelRaceGroup MoveToB8 = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain, 1, 30),
+                new RunIntakeCommand(intake, hopper, Constants.Robot.MotorSpeeds.INTAKE_SPEED_FORWARD, Constants.Robot.MotorSpeeds.INTAKE_SQUEEZE_SPEED_FORWARDS, Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT_INTAKE),
+                new WaitCommand(1.5)
+        );
+        ParallelRaceGroup MoveToD10 = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain, 1, -30),
+                new RunIntakeCommand(intake, hopper, Constants.Robot.MotorSpeeds.INTAKE_SPEED_FORWARD, Constants.Robot.MotorSpeeds.INTAKE_SQUEEZE_SPEED_FORWARDS, Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT_INTAKE),
+                new WaitCommand(1.5)
+        );
+
+        return new SequentialCommandGroup(
+                DriveToD6,
+                MoveToB8,
+                MoveToD10
+
+        );
+    }
 }
