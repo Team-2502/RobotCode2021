@@ -113,6 +113,12 @@ public class RobotContainer {
       if (VISION.getGalacticSearchPath() == 3) {
         return AutonomousCommandGroupFactory.GalacticSearchRedB(DRIVE_TRAIN, INTAKE, HOPPER, VISION, SHOOTER);
       }
+      if (VISION.getGalacticSearchPath() == 4) {
+        return AutonomousCommandGroupFactory.GalacticSearchBlueB(DRIVE_TRAIN, INTAKE, HOPPER, VISION, SHOOTER);
+      }
+      if (VISION.getGalacticSearchPath() == 2) {
+        return AutonomousCommandGroupFactory.GalacticSearchRedB(DRIVE_TRAIN, INTAKE, HOPPER, VISION, SHOOTER);
+      }
     }
 
     return AutoSwitcher.getAutoInstance().getInstance(
