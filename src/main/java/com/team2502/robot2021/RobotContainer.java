@@ -117,7 +117,7 @@ public class RobotContainer {
         return AutonomousCommandGroupFactory.GalacticSearchBlueB(DRIVE_TRAIN, INTAKE, HOPPER, VISION, SHOOTER);
       }
       if (VISION.getGalacticSearchPath() == 2) {
-        return AutonomousCommandGroupFactory.GalacticSearchRedB(DRIVE_TRAIN, INTAKE, HOPPER, VISION, SHOOTER);
+        return AutonomousCommandGroupFactory.GalacticSearchBlueA(DRIVE_TRAIN, INTAKE, HOPPER, VISION, SHOOTER);
       }
     }
 
