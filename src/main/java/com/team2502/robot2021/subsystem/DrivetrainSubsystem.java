@@ -32,8 +32,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
         drivetrainFrontRight.setInverted(TalonFXInvertType.CounterClockwise);
         drivetrainFrontLeft.setInverted(TalonFXInvertType.CounterClockwise);
 
-        drivetrainFrontRight.setNeutralMode(NeutralMode.Brake);
-        drivetrainFrontLeft.setNeutralMode(NeutralMode.Brake);
+        drivetrainFrontRight.setNeutralMode(NeutralMode.Coast);
+        drivetrainFrontLeft.setNeutralMode(NeutralMode.Coast);
 
         navX = new AHRS(SPI.Port.kMXP);
         resetHeading();

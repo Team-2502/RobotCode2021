@@ -39,6 +39,60 @@ public class AutonomousCommandGroupFactory {
         return new SequentialCommandGroup(drive);
     }
 
+    public static SequentialCommandGroup SLALOM_PATH(DrivetrainSubsystem drivetrain, IntakeSubsystem intake, HopperSubsystem hopper, VisionSubsystem v, ShooterSubsystem shooter) {
+        ParallelRaceGroup TurnToFirstStraightaway = new ParallelRaceGroup(
+                new VoltageDriveCommand(drivetrain, 0.7, 1.0),
+                new WaitCommand(0.75)
+        );
+
+        ParallelRaceGroup TurnToFirstStraightaway2 = new ParallelRaceGroup(
+                new VoltageDriveCommand(drivetrain, 1.0, 0.8),
+                new WaitCommand(0.5)
+        );
+
+        ParallelRaceGroup StraightToEndTurn = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain, 1.0, 0),
+                new WaitCommand(0.72)
+        );
+
+        ParallelRaceGroup EndTurn1 = new ParallelRaceGroup(
+                new VoltageDriveCommand(drivetrain, 0.8, 0.5),
+                new WaitCommand(0.55)
+        );
+        ParallelRaceGroup EndTurn2 = new ParallelRaceGroup(
+                new VoltageDriveCommand(drivetrain, 0.5, 1.0),
+                new WaitCommand(2.1)
+        );
+
+        ParallelRaceGroup StraightBack = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain, 1.0, -179),
+                new WaitCommand(1.52)
+        );
+
+        ParallelRaceGroup FinalTurn1 = new ParallelRaceGroup(
+                new VoltageDriveCommand(drivetrain, 1.0, 0.7),
+                new WaitCommand(0.40)
+        );
+
+        ParallelRaceGroup FinalTurn2 = new ParallelRaceGroup(
+                new VoltageDriveCommand(drivetrain, 0.8, 1.0),
+                new WaitCommand(1.0)
+        );
+
+        return new SequentialCommandGroup(
+                TurnToFirstStraightaway,
+                TurnToFirstStraightaway2,
+                new ToggleDrivetrainGearCommand(drivetrain),
+                StraightToEndTurn,
+                EndTurn1,
+                EndTurn2,
+                StraightBack,
+                new ToggleDrivetrainGearCommand(drivetrain),
+                FinalTurn1,
+                FinalTurn2
+        );
+    }
+
     public static SequentialCommandGroup BARREL_RACING_LOW(DrivetrainSubsystem drivetrain, IntakeSubsystem intake, HopperSubsystem hopper, VisionSubsystem vision, ShooterSubsystem shooter) {
         // 12.43 Chris
         ParallelRaceGroup ForwardFromStartZone = new ParallelRaceGroup(
@@ -192,7 +246,7 @@ public class AutonomousCommandGroupFactory {
                 new RunHopperCommand(hopper, shooter, Constants.Robot.MotorSpeeds.HOPPER_LEFT_BELT,
                         Constants.Robot.MotorSpeeds.HOPPER_RIGHT_BELT, Constants.Robot.MotorSpeeds.HOPPER_EXIT_WHEEL,
                         Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT, false),
-                new WaitCommand(2)
+                new WaitCommand(3)
         );
 
         ParallelRaceGroup TurnToBalls = new ParallelRaceGroup(
@@ -208,26 +262,25 @@ public class AutonomousCommandGroupFactory {
 
         ParallelRaceGroup stopAndIntake = new ParallelRaceGroup(
                 new VoltageDriveCommand(drivetrain, 0, 0),
-                new ShootAtRPMCommand(shooter, Constants.LookupTables.DIST_TO_RPM_TABLE.get(30D)),
+                new RunShooterCommand(shooter, vision, Constants.LookupTables.DIST_TO_RPM_TABLE.get(30D)),
                 new RunIntakeCommand(intake, hopper, Constants.Robot.MotorSpeeds.INTAKE_SPEED_FORWARD, Constants.Robot.MotorSpeeds.INTAKE_SQUEEZE_SPEED_FORWARDS, Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT_INTAKE),
                 new WaitCommand(1.5)
         );
 
         ParallelRaceGroup TurnToTarget = new ParallelRaceGroup(
-                new TurnToAngleCommand(drivetrain, 22),
+                new RunShooterCommand(shooter, vision, Constants.LookupTables.DIST_TO_RPM_TABLE.get(30D)),
+                new TurnToAngleCommand(drivetrain, 11.5),
                 new RunIntakeCommand(intake, hopper, Constants.Robot.MotorSpeeds.INTAKE_SPEED_FORWARD, Constants.Robot.MotorSpeeds.INTAKE_SQUEEZE_SPEED_FORWARDS, Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT_INTAKE),
-                new WaitCommand(1.5)
+                new WaitCommand(2.0)
         );
 
-        ParallelRaceGroup VisionAlignment = new ParallelRaceGroup(
-                new VoltageDriveWhileVisionAligningCommand(vision, drivetrain, 0.4),
-                new WaitCommand(1)
-        );
         ParallelCommandGroup runHopperAndShootBallsAligning = new ParallelCommandGroup(
+                new RunShooterCommand(shooter, vision, Constants.LookupTables.DIST_TO_RPM_TABLE.get(30D)),
+                new VoltageDriveWhileVisionAligningCommand(vision, drivetrain, 0.0),
                 new RunHopperCommand(hopper, shooter, Constants.Robot.MotorSpeeds.HOPPER_LEFT_BELT,
                         Constants.Robot.MotorSpeeds.HOPPER_RIGHT_BELT, Constants.Robot.MotorSpeeds.HOPPER_EXIT_WHEEL,
                         Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT, false),
-                new WaitCommand(2)
+                new WaitCommand(2.0)
         );
 
 
@@ -237,9 +290,7 @@ public class AutonomousCommandGroupFactory {
                 TurnToBalls,
                 driveThroughTrench,
                 stopAndIntake,
-                new RunShooterCommand(shooter, vision, Constants.LookupTables.DIST_TO_RPM_TABLE.get(25D)),
                 TurnToTarget,
-                VisionAlignment,
                 runHopperAndShootBallsAligning
         );
     }

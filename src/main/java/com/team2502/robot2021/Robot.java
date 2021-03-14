@@ -67,12 +67,13 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     ROBOT_CONTAINER.DRIVE_TRAIN.resetHeading();
+    ROBOT_CONTAINER.DRIVE_TRAIN.enterLowGear();
     ROBOT_CONTAINER.VISION.limeLightOn();
+
     Command autonomousRoutine = ROBOT_CONTAINER.getAutonomousRoutine();
     if(autonomousRoutine != null) {
       CommandScheduler.getInstance().schedule(autonomousRoutine);
     }
-    //ROBOT_CONTAINER.DRIVE_TRAIN.enterHighGear();
   }
 
   /**
