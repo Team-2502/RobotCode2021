@@ -127,12 +127,12 @@ public class AutonomousCommandGroupFactory {
         return new SequentialCommandGroup(
                 ForwardFromStartZone,
                 TurnAroundPoint1
-      //          StraightToSecondPoint,
-       //         TurnLeftAroundPoint2,
-     //           StraightToThirdPoint,
-      //          TurnAroundThirdPoint,
-      //          new ToggleDrivetrainGearCommand(drivetrain),
-     //           StraightBackToStartZone
+                //          StraightToSecondPoint,
+                //         TurnLeftAroundPoint2,
+                //           StraightToThirdPoint,
+                //          TurnAroundThirdPoint,
+                //          new ToggleDrivetrainGearCommand(drivetrain),
+                //           StraightBackToStartZone
         );
     }
 
@@ -381,8 +381,8 @@ public class AutonomousCommandGroupFactory {
         );
 
         ParallelRaceGroup driveToEnd = new ParallelRaceGroup(
-          new DriveStraightCommand(drivetrain, 0.6, 0),
-          new WaitCommand(1)
+                new DriveStraightCommand(drivetrain, 0.6, 0),
+                new WaitCommand(1)
         );
 
 
@@ -404,76 +404,76 @@ public class AutonomousCommandGroupFactory {
                 turnToC9,
                 intakeWhileMoving,
                 driveToEnd
-                );
-
+        );
 
 
     }
-    public static SequentialCommandGroup Galactic_B_Backup(DrivetrainSubsystem drivetrain, IntakeSubsystem intake, HopperSubsystem hopper, VisionSubsystem v, ShooterSubsystem shooter){
+
+    public static SequentialCommandGroup Galactic_B_Backup(DrivetrainSubsystem drivetrain, IntakeSubsystem intake, HopperSubsystem hopper, VisionSubsystem v, ShooterSubsystem shooter) {
 
         ParallelRaceGroup straightToB3Pickup = new ParallelRaceGroup(
-                new DriveStraightCommand(drivetrain,0.6,0),
+                new DriveStraightCommand(drivetrain, 0.6, 0),
                 new RunIntakeCommand(intake, hopper, Constants.Robot.MotorSpeeds.INTAKE_SPEED_FORWARD, Constants.Robot.MotorSpeeds.INTAKE_SQUEEZE_SPEED_FORWARDS, Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT_INTAKE),
                 new WaitCommand(0.6)
         );
 
         ParallelRaceGroup turnToD5 = new ParallelRaceGroup(
-                new TurnToAngleCommand(drivetrain,30),
+                new TurnToAngleCommand(drivetrain, 30),
                 new WaitCommand(1)
         );
 
         ParallelRaceGroup straightToD5Pickup = new ParallelRaceGroup(
-                new DriveStraightCommand(drivetrain,0.6,30),
+                new DriveStraightCommand(drivetrain, 0.6, 30),
                 new RunIntakeCommand(intake, hopper, Constants.Robot.MotorSpeeds.INTAKE_SPEED_FORWARD, Constants.Robot.MotorSpeeds.INTAKE_SQUEEZE_SPEED_FORWARDS, Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT_INTAKE),
                 new WaitCommand(0.6)
         );
 
         ParallelRaceGroup turnToD6 = new ParallelRaceGroup(
-                new TurnToAngleCommand(drivetrain,0),
+                new TurnToAngleCommand(drivetrain, 0),
                 new WaitCommand(1)
         );
 
         ParallelRaceGroup straightToD6Pickup = new ParallelRaceGroup(
-                new DriveStraightCommand(drivetrain,0.7,0),
+                new DriveStraightCommand(drivetrain, 0.7, 0),
                 new RunIntakeCommand(intake, hopper, Constants.Robot.MotorSpeeds.INTAKE_SPEED_FORWARD, Constants.Robot.MotorSpeeds.INTAKE_SQUEEZE_SPEED_FORWARDS, Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT_INTAKE),
                 new WaitCommand(0.4)
         );
 
         ParallelRaceGroup turnToB7 = new ParallelRaceGroup(
-                new TurnToAngleCommand(drivetrain,290),
+                new TurnToAngleCommand(drivetrain, 290),
                 new WaitCommand(1)
         );
 
         ParallelRaceGroup strightToB7Pickup = new ParallelRaceGroup(
-                new DriveStraightCommand(drivetrain, 0.6,290),
+                new DriveStraightCommand(drivetrain, 0.6, 290),
                 new RunIntakeCommand(intake, hopper, Constants.Robot.MotorSpeeds.INTAKE_SPEED_FORWARD, Constants.Robot.MotorSpeeds.INTAKE_SQUEEZE_SPEED_FORWARDS, Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT_INTAKE),
                 new WaitCommand(0.6)
         );
 
         ParallelRaceGroup turnToB8 = new ParallelRaceGroup(
-                new TurnToAngleCommand(drivetrain,0),
+                new TurnToAngleCommand(drivetrain, 0),
                 new WaitCommand(1)
         );
 
         ParallelRaceGroup straightToB8Pickup = new ParallelRaceGroup(
-                new DriveStraightCommand(drivetrain,0.7,0),
+                new DriveStraightCommand(drivetrain, 0.7, 0),
                 new RunIntakeCommand(intake, hopper, Constants.Robot.MotorSpeeds.INTAKE_SPEED_FORWARD, Constants.Robot.MotorSpeeds.INTAKE_SQUEEZE_SPEED_FORWARDS, Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT_INTAKE),
                 new WaitCommand(0.4)
         );
 
         ParallelRaceGroup turnToD10 = new ParallelRaceGroup(
-                new TurnToAngleCommand(drivetrain,70),
+                new TurnToAngleCommand(drivetrain, 70),
                 new WaitCommand(1)
         );
 
         ParallelRaceGroup straightToD10 = new ParallelRaceGroup(
-                new DriveStraightCommand(drivetrain,0.6,70),
+                new DriveStraightCommand(drivetrain, 0.6, 70),
                 new RunIntakeCommand(intake, hopper, Constants.Robot.MotorSpeeds.INTAKE_SPEED_FORWARD, Constants.Robot.MotorSpeeds.INTAKE_SQUEEZE_SPEED_FORWARDS, Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT_INTAKE),
                 new WaitCommand(0.6)
         );
 
         ParallelRaceGroup goToEnd = new ParallelRaceGroup(
-                new DriveStraightCommand(drivetrain,0.6,55),
+                new DriveStraightCommand(drivetrain, 0.6, 55),
                 new WaitCommand(0.5)
         );
 
@@ -494,7 +494,7 @@ public class AutonomousCommandGroupFactory {
         );
     }
 
-    public static SequentialCommandGroup GalacticSearchRedB(DrivetrainSubsystem drivetrain, IntakeSubsystem intake, HopperSubsystem hopper, VisionSubsystem v, ShooterSubsystem shooter){
+    public static SequentialCommandGroup GalacticSearchRedB(DrivetrainSubsystem drivetrain, IntakeSubsystem intake, HopperSubsystem hopper, VisionSubsystem v, ShooterSubsystem shooter) {
         ParallelRaceGroup firstServe = new ParallelRaceGroup(
                 new VoltageDriveCommand(drivetrain, 0.8, 1),
                 new RunIntakeCommand(intake, hopper, Constants.Robot.MotorSpeeds.INTAKE_SPEED_FORWARD, Constants.Robot.MotorSpeeds.INTAKE_SQUEEZE_SPEED_FORWARDS, Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT_INTAKE),
@@ -551,6 +551,7 @@ public class AutonomousCommandGroupFactory {
                 MoveHome
         );
     }
+
     public static SequentialCommandGroup GalacticSearchBlueB(DrivetrainSubsystem drivetrain, IntakeSubsystem intake, HopperSubsystem hopper, VisionSubsystem v, ShooterSubsystem shooter) {
         ParallelRaceGroup DriveToD6 = new ParallelRaceGroup(
                 new DriveStraightCommand(drivetrain, 1, -10),
@@ -576,7 +577,7 @@ public class AutonomousCommandGroupFactory {
         );
     }
 
-    public static SequentialCommandGroup GalacticSearchBlueA(DrivetrainSubsystem drivetrain, IntakeSubsystem intake, HopperSubsystem hopper, VisionSubsystem v, ShooterSubsystem shooter){
+    public static SequentialCommandGroup GalacticSearchBlueA(DrivetrainSubsystem drivetrain, IntakeSubsystem intake, HopperSubsystem hopper, VisionSubsystem v, ShooterSubsystem shooter) {
         ParallelRaceGroup driveStraight1 = new ParallelRaceGroup(
                 new DriveStraightCommand(drivetrain, 1, -15),
                 new RunIntakeCommand(intake, hopper, Constants.Robot.MotorSpeeds.INTAKE_SPEED_FORWARD, Constants.Robot.MotorSpeeds.INTAKE_SQUEEZE_SPEED_FORWARDS, Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT_INTAKE),
@@ -606,4 +607,101 @@ public class AutonomousCommandGroupFactory {
                 driveStraight3
         );
     }
+
+    public static SequentialCommandGroup BouncePath(DrivetrainSubsystem drivetrain, IntakeSubsystem intake, HopperSubsystem hopper, VisionSubsystem v, ShooterSubsystem shooter) {
+
+        ParallelRaceGroup startTurn = new ParallelRaceGroup(
+            new VoltageDriveCommand(drivetrain, 0.75, 1),
+            new WaitCommand(1.5)
+        );
+
+        ParallelRaceGroup initialDriveStraight = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain, 1),
+                new WaitCommand(1)
+        );
+
+        ParallelRaceGroup turnBounce1 = new ParallelRaceGroup(
+                new TurnToAngleCommand(drivetrain, 260),
+                new WaitCommand(2)
+        );
+
+        ParallelRaceGroup firstBounceDrive = new ParallelRaceGroup(
+                new VoltageDriveCommand(drivetrain, 1, 0.8),
+                new WaitCommand(2.5)
+        );
+
+        ParallelRaceGroup firstBounce1 = new ParallelRaceGroup(
+                new TurnToAngleCommand(drivetrain, 260),
+                new WaitCommand(2)
+        );
+
+        ParallelRaceGroup firstBouncePart2 = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain, -1, 180),
+                new WaitCommand(1)
+        );
+
+        ParallelRaceGroup firstBouncePart3 = new ParallelRaceGroup(
+                new VoltageDriveCommand(drivetrain, 1, 0.65),
+                new WaitCommand(1)
+        );
+
+        ParallelRaceGroup firstBouncePart4 = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain, -1, 180),
+                new WaitCommand(2.5)
+        );
+
+        ParallelRaceGroup turnBounce2 = new ParallelRaceGroup(
+                new TurnToAngleCommand(drivetrain, 70),
+                new WaitCommand(2)
+        );
+
+        ParallelRaceGroup secondBouncePart1 = new ParallelRaceGroup(
+                new VoltageDriveCommand(drivetrain, 0.8, 1),
+                new WaitCommand(2)
+        );
+
+        ParallelRaceGroup secondBouncePart2 = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain, 1, 0),
+                new WaitCommand(1)
+        );
+
+        ParallelRaceGroup secondBouncePart3 = new ParallelRaceGroup(
+                new VoltageDriveCommand(drivetrain, 0.8, 1),
+                new WaitCommand(1)
+        );
+
+        ParallelRaceGroup secondBouncePart4 = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain, 1, 280),
+                new WaitCommand(2.5)
+        );
+
+        ParallelRaceGroup turnBounce3 = new ParallelRaceGroup(
+                new TurnToAngleCommand(drivetrain, 260),
+                new WaitCommand(2)
+        );
+
+        ParallelRaceGroup thirdBouncePart1 = new ParallelRaceGroup(
+                new VoltageDriveCommand(drivetrain, 0.75, 1),
+                new WaitCommand(2)
+        );
+
+        return new SequentialCommandGroup(
+                startTurn,
+                initialDriveStraight,
+                turnBounce1,
+                firstBounceDrive,
+                firstBounce1,
+                firstBouncePart2,
+                firstBouncePart3,
+                firstBouncePart4,
+                turnBounce2,
+                secondBouncePart1,
+                secondBouncePart2,
+                secondBouncePart3,
+                secondBouncePart4,
+                turnBounce3,
+                thirdBouncePart1
+        );
+    }
+
 }
