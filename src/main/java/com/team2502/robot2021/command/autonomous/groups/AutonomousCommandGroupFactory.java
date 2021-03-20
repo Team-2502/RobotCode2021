@@ -42,36 +42,40 @@ public class AutonomousCommandGroupFactory {
     public static SequentialCommandGroup SLALOM_PATH(DrivetrainSubsystem drivetrain, IntakeSubsystem intake, HopperSubsystem hopper, VisionSubsystem v, ShooterSubsystem shooter) {
         ParallelRaceGroup TurnToFirstStraightaway = new ParallelRaceGroup(
                 new VoltageDriveCommand(drivetrain, 0.7, 1.0),
-                new WaitCommand(0.75)
+                new WaitCommand(0.85)
         );
 
         ParallelRaceGroup TurnToFirstStraightaway2 = new ParallelRaceGroup(
-                new VoltageDriveCommand(drivetrain, 1.0, 0.8),
-                new WaitCommand(0.5)
+                new VoltageDriveCommand(drivetrain, 1.0, 0.65),
+                new WaitCommand(0.45)
         );
 
         ParallelRaceGroup StraightToEndTurn = new ParallelRaceGroup(
                 new DriveStraightCommand(drivetrain, 1.0, 0),
-                new WaitCommand(0.72)
+                new WaitCommand(0.77)
         );
 
         ParallelRaceGroup EndTurn1 = new ParallelRaceGroup(
-                new VoltageDriveCommand(drivetrain, 0.8, 0.5),
-                new WaitCommand(0.55)
+                new DriveStraightCommand(drivetrain, 0.85, -40),
+                new WaitCommand(0.50)
         );
         ParallelRaceGroup EndTurn2 = new ParallelRaceGroup(
-                new VoltageDriveCommand(drivetrain, 0.5, 1.0),
-                new WaitCommand(2.1)
+                new VoltageDriveCommand(drivetrain, 0.5, 0.8),
+                new WaitCommand(2.7)
+        );
+        ParallelRaceGroup EndTurn3 = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain, 1.0, -95),
+                new WaitCommand(0.5)
         );
 
         ParallelRaceGroup StraightBack = new ParallelRaceGroup(
                 new DriveStraightCommand(drivetrain, 1.0, -179),
-                new WaitCommand(1.52)
+                new WaitCommand(1.45)
         );
 
         ParallelRaceGroup FinalTurn1 = new ParallelRaceGroup(
                 new VoltageDriveCommand(drivetrain, 1.0, 0.7),
-                new WaitCommand(0.40)
+                new WaitCommand(0.30)
         );
 
         ParallelRaceGroup FinalTurn2 = new ParallelRaceGroup(
@@ -86,10 +90,11 @@ public class AutonomousCommandGroupFactory {
                 StraightToEndTurn,
                 EndTurn1,
                 EndTurn2,
-                StraightBack,
-                new ToggleDrivetrainGearCommand(drivetrain),
-                FinalTurn1,
-                FinalTurn2
+                EndTurn3
+                //StraightBack,
+                //new ToggleDrivetrainGearCommand(drivetrain),
+                //FinalTurn1,
+                //FinalTurn2
         );
     }
 
