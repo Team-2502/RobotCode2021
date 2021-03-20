@@ -23,7 +23,7 @@ public class HopperSubsystem extends SubsystemBase {
         hopperExitWheel.setSmartCurrentLimit(25);
 
         hopperSideBeltsRight.setInverted(true);
-        hopperExitWheel.setInverted(true);
+        hopperExitWheel.setInverted(false);
     }
 
     public void runLeftBelt(double speed) { hopperSideBeltsLeft.set(speed); }
