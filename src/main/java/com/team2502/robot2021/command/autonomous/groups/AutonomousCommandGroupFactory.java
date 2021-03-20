@@ -97,11 +97,11 @@ public class AutonomousCommandGroupFactory {
         // 12.43 Chris
         ParallelRaceGroup ForwardFromStartZone = new ParallelRaceGroup(
                 new DriveStraightCommand(drivetrain, 1.0, 0),
-                new WaitCommand(1.0)
+                new WaitCommand(1.25)
         );
         ParallelRaceGroup TurnAroundPoint1 = new ParallelRaceGroup(
-                new VoltageDriveCommand(drivetrain, 1.0, 0.6),
-                new WaitCommand(3.0)
+                new VoltageDriveCommand(drivetrain, 1.0, 0.5),
+                new WaitCommand(1.55)
         );
         ParallelRaceGroup StraightToSecondPoint = new ParallelRaceGroup(
                 new DriveStraightCommand(drivetrain, 1.0, 0),
@@ -126,13 +126,13 @@ public class AutonomousCommandGroupFactory {
 
         return new SequentialCommandGroup(
                 ForwardFromStartZone,
-                TurnAroundPoint1,
-                StraightToSecondPoint,
-                TurnLeftAroundPoint2,
-                StraightToThirdPoint,
-                TurnAroundThirdPoint,
-                new ToggleDrivetrainGearCommand(drivetrain),
-                StraightBackToStartZone
+                TurnAroundPoint1
+      //          StraightToSecondPoint,
+       //         TurnLeftAroundPoint2,
+     //           StraightToThirdPoint,
+      //          TurnAroundThirdPoint,
+      //          new ToggleDrivetrainGearCommand(drivetrain),
+     //           StraightBackToStartZone
         );
     }
 
@@ -140,7 +140,7 @@ public class AutonomousCommandGroupFactory {
         // 12.43 Chris
         ParallelRaceGroup ForwardFromStartZone = new ParallelRaceGroup(
                 new DriveStraightCommand(drivetrain, 1.0, 8),
-                new WaitCommand(0.92)
+                new WaitCommand(1.0)
         );
         ParallelRaceGroup TurnAroundPoint1 = new ParallelRaceGroup(
                 new VoltageDriveCommand(drivetrain, 1.0, 0.5),
@@ -553,19 +553,19 @@ public class AutonomousCommandGroupFactory {
     }
     public static SequentialCommandGroup GalacticSearchBlueB(DrivetrainSubsystem drivetrain, IntakeSubsystem intake, HopperSubsystem hopper, VisionSubsystem v, ShooterSubsystem shooter) {
         ParallelRaceGroup DriveToD6 = new ParallelRaceGroup(
-                new DriveStraightCommand(drivetrain, 1, -8),
+                new DriveStraightCommand(drivetrain, 1, -10),
                 new RunIntakeCommand(intake, hopper, Constants.Robot.MotorSpeeds.INTAKE_SPEED_FORWARD, Constants.Robot.MotorSpeeds.INTAKE_SQUEEZE_SPEED_FORWARDS, Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT_INTAKE),
-                new WaitCommand(3)
+                new WaitCommand(1.5)
         );
         ParallelRaceGroup MoveToB8 = new ParallelRaceGroup(
                 new DriveStraightCommand(drivetrain, 1, 30),
                 new RunIntakeCommand(intake, hopper, Constants.Robot.MotorSpeeds.INTAKE_SPEED_FORWARD, Constants.Robot.MotorSpeeds.INTAKE_SQUEEZE_SPEED_FORWARDS, Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT_INTAKE),
-                new WaitCommand(1.5)
+                new WaitCommand(0.9)
         );
         ParallelRaceGroup MoveToD10 = new ParallelRaceGroup(
                 new DriveStraightCommand(drivetrain, 1, -30),
                 new RunIntakeCommand(intake, hopper, Constants.Robot.MotorSpeeds.INTAKE_SPEED_FORWARD, Constants.Robot.MotorSpeeds.INTAKE_SQUEEZE_SPEED_FORWARDS, Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT_INTAKE),
-                new WaitCommand(1.5)
+                new WaitCommand(0.9)
         );
 
         return new SequentialCommandGroup(
