@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 public class AutonomousCommandGroupFactory {
+
     private static SequentialCommandGroup SpoolUpShooterAndShootRaceGroup(ShooterSubsystem shooter, HopperSubsystem hopper, double speed) {
         ParallelRaceGroup spoolUpShooter = new ParallelRaceGroup(
                 new ShootAtRPMCommand(shooter, speed),
@@ -195,53 +196,6 @@ public class AutonomousCommandGroupFactory {
                     straightTo3,
                     turnToFinish
             );
-    }
-
-    public static SequentialCommandGroup BARREL_RACING_HIGH(DrivetrainSubsystem drivetrain, IntakeSubsystem intake, HopperSubsystem hopper, VisionSubsystem vision, ShooterSubsystem shooter) {
-        // 12.43 Chris
-        ParallelRaceGroup ForwardFromStartZone = new ParallelRaceGroup(
-                new DriveStraightCommand(drivetrain, 1.0, 8),
-                new WaitCommand(1.0)
-        );
-        ParallelRaceGroup TurnAroundPoint1 = new ParallelRaceGroup(
-                new VoltageDriveCommand(drivetrain, 1.0, 0.5),
-                new WaitCommand(2.0)
-        );
-        ParallelRaceGroup StraightToSecondPoint = new ParallelRaceGroup(
-                new DriveStraightCommand(drivetrain, 1.0, 0),
-                new WaitCommand(0.60)
-        );
-        ParallelRaceGroup TurnLeftAroundPoint2 = new ParallelRaceGroup(
-                new VoltageDriveCommand(drivetrain, 0.6, 1.0),
-                new WaitCommand(2.75)
-        );
-        ParallelRaceGroup StraightToThirdPoint = new ParallelRaceGroup(
-                new DriveStraightCommand(drivetrain, 1.0, -45), // -50
-                new WaitCommand(0.3)
-        );
-        ParallelRaceGroup TurnAroundThirdPoint = new ParallelRaceGroup(
-                new VoltageDriveCommand(drivetrain, 0.6, 1.0),
-                new WaitCommand(2)
-        );
-        ParallelRaceGroup StraightBackToStartZone = new ParallelRaceGroup(
-                new DriveStraightCommand(drivetrain, 1.0, 180),
-                new WaitCommand(1.5)
-        );
-
-        return new SequentialCommandGroup(
-                new ToggleDrivetrainGearCommand(drivetrain),
-                ForwardFromStartZone,
-                TurnAroundPoint1,
-                StraightToSecondPoint
-//                new ToggleDrivetrainGearCommand(drivetrain),
-//                TurnLeftAroundPoint2,
-//                new ToggleDrivetrainGearCommand(drivetrain),
-//                StraightToThirdPoint,
-//                new ToggleDrivetrainGearCommand(drivetrain),
-//                TurnAroundThirdPoint,
-//                new ToggleDrivetrainGearCommand(drivetrain),
-//                StraightBackToStartZone
-        );
     }
 
     public static SequentialCommandGroup LEFT_START_RENDEZVOUS_4_BALL(DrivetrainSubsystem drivetrain, IntakeSubsystem intake, HopperSubsystem hopper, VisionSubsystem v, ShooterSubsystem shooter) {
@@ -470,7 +424,7 @@ public class AutonomousCommandGroupFactory {
 
     }
 
-    public static SequentialCommandGroup Galactic_B_Backup(DrivetrainSubsystem drivetrain, IntakeSubsystem intake, HopperSubsystem hopper, VisionSubsystem v, ShooterSubsystem shooter) {
+    public static SequentialCommandGroup PATH_B_PICKUP_ALL(DrivetrainSubsystem drivetrain, IntakeSubsystem intake, HopperSubsystem hopper, VisionSubsystem v, ShooterSubsystem shooter) {
 
         ParallelRaceGroup straightToB3Pickup = new ParallelRaceGroup(
                 new DriveStraightCommand(drivetrain, 0.6, 0),
@@ -681,102 +635,6 @@ public class AutonomousCommandGroupFactory {
                 driveStraight1,
                 driveStraight2,
                 driveStraight3
-        );
-    }
-
-    public static SequentialCommandGroup BouncePath(DrivetrainSubsystem drivetrain, IntakeSubsystem intake, HopperSubsystem hopper, VisionSubsystem v, ShooterSubsystem shooter) {
-
-        ParallelRaceGroup startTurn = new ParallelRaceGroup(
-            new VoltageDriveCommand(drivetrain, 0.75, 1),
-            new WaitCommand(1.5)
-        );
-
-        ParallelRaceGroup initialDriveStraight = new ParallelRaceGroup(
-                new DriveStraightCommand(drivetrain, 1),
-                new WaitCommand(1)
-        );
-
-        ParallelRaceGroup turnBounce1 = new ParallelRaceGroup(
-                new TurnToAngleCommand(drivetrain, 260),
-                new WaitCommand(2)
-        );
-
-        ParallelRaceGroup firstBounceDrive = new ParallelRaceGroup(
-                new VoltageDriveCommand(drivetrain, 1, 0.8),
-                new WaitCommand(2.5)
-        );
-
-        ParallelRaceGroup firstBounce1 = new ParallelRaceGroup(
-                new TurnToAngleCommand(drivetrain, 260),
-                new WaitCommand(2)
-        );
-
-        ParallelRaceGroup firstBouncePart2 = new ParallelRaceGroup(
-                new DriveStraightCommand(drivetrain, -1, 180),
-                new WaitCommand(1)
-        );
-
-        ParallelRaceGroup firstBouncePart3 = new ParallelRaceGroup(
-                new VoltageDriveCommand(drivetrain, 1, 0.65),
-                new WaitCommand(1)
-        );
-
-        ParallelRaceGroup firstBouncePart4 = new ParallelRaceGroup(
-                new DriveStraightCommand(drivetrain, -1, 180),
-                new WaitCommand(2.5)
-        );
-
-        ParallelRaceGroup turnBounce2 = new ParallelRaceGroup(
-                new TurnToAngleCommand(drivetrain, 70),
-                new WaitCommand(2)
-        );
-
-        ParallelRaceGroup secondBouncePart1 = new ParallelRaceGroup(
-                new VoltageDriveCommand(drivetrain, 0.8, 1),
-                new WaitCommand(2)
-        );
-
-        ParallelRaceGroup secondBouncePart2 = new ParallelRaceGroup(
-                new DriveStraightCommand(drivetrain, 1, 0),
-                new WaitCommand(1)
-        );
-
-        ParallelRaceGroup secondBouncePart3 = new ParallelRaceGroup(
-                new VoltageDriveCommand(drivetrain, 0.8, 1),
-                new WaitCommand(1)
-        );
-
-        ParallelRaceGroup secondBouncePart4 = new ParallelRaceGroup(
-                new DriveStraightCommand(drivetrain, 1, 280),
-                new WaitCommand(2.5)
-        );
-
-        ParallelRaceGroup turnBounce3 = new ParallelRaceGroup(
-                new TurnToAngleCommand(drivetrain, 260),
-                new WaitCommand(2)
-        );
-
-        ParallelRaceGroup thirdBouncePart1 = new ParallelRaceGroup(
-                new VoltageDriveCommand(drivetrain, 0.75, 1),
-                new WaitCommand(2)
-        );
-
-        return new SequentialCommandGroup(
-                startTurn,
-                initialDriveStraight,
-                turnBounce1,
-                firstBounceDrive,
-                firstBounce1,
-                firstBouncePart2,
-                firstBouncePart3,
-                firstBouncePart4,
-                turnBounce2,
-                secondBouncePart1,
-                secondBouncePart2,
-                secondBouncePart3,
-                secondBouncePart4,
-                turnBounce3,
-                thirdBouncePart1
         );
     }
 
