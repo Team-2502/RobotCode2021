@@ -42,40 +42,44 @@ public class AutonomousCommandGroupFactory {
     public static SequentialCommandGroup SLALOM_PATH(DrivetrainSubsystem drivetrain, IntakeSubsystem intake, HopperSubsystem hopper, VisionSubsystem v, ShooterSubsystem shooter) {
         ParallelRaceGroup TurnToFirstStraightaway = new ParallelRaceGroup(
                 new VoltageDriveCommand(drivetrain, 0.7, 1.0),
-                new WaitCommand(0.85)
+                new WaitCommand(0.90)
         );
 
         ParallelRaceGroup TurnToFirstStraightaway2 = new ParallelRaceGroup(
-                new VoltageDriveCommand(drivetrain, 1.0, 0.65),
-                new WaitCommand(0.45)
+                new VoltageDriveCommand(drivetrain, 1.0, 0.60),
+                new WaitCommand(0.40)
         );
 
         ParallelRaceGroup StraightToEndTurn = new ParallelRaceGroup(
                 new DriveStraightCommand(drivetrain, 1.0, 0),
-                new WaitCommand(0.77)
+                new WaitCommand(1.2)
         );
 
         ParallelRaceGroup EndTurn1 = new ParallelRaceGroup(
-                new DriveStraightCommand(drivetrain, 0.85, -40),
-                new WaitCommand(0.50)
+                new DriveStraightCommand(drivetrain, 0.85, -70),
+                new WaitCommand(0.7)
         );
         ParallelRaceGroup EndTurn2 = new ParallelRaceGroup(
-                new VoltageDriveCommand(drivetrain, 0.5, 0.8),
-                new WaitCommand(2.7)
+                new VoltageDriveCommand(drivetrain, 0.65, 1.0),
+                new WaitCommand(2.65)
         );
-        ParallelRaceGroup EndTurn3 = new ParallelRaceGroup(
-                new DriveStraightCommand(drivetrain, 1.0, -95),
-                new WaitCommand(0.5)
+        ParallelRaceGroup EndTurn2b = new ParallelRaceGroup(
+                new DriveStraightCommand(drivetrain, 0.85, -90),
+                new WaitCommand(0.30)
+        );
+        ParallelRaceGroup EndTurn3b = new ParallelRaceGroup(
+                new VoltageDriveCommand(drivetrain, 1.0, 0.1),
+                new WaitCommand(0.45)
         );
 
         ParallelRaceGroup StraightBack = new ParallelRaceGroup(
                 new DriveStraightCommand(drivetrain, 1.0, -179),
-                new WaitCommand(1.45)
+                new WaitCommand(1.4)
         );
 
         ParallelRaceGroup FinalTurn1 = new ParallelRaceGroup(
-                new VoltageDriveCommand(drivetrain, 1.0, 0.7),
-                new WaitCommand(0.30)
+                new DriveStraightCommand(drivetrain, 1.0, 110),
+                new WaitCommand(1.5)
         );
 
         ParallelRaceGroup FinalTurn2 = new ParallelRaceGroup(
@@ -86,15 +90,13 @@ public class AutonomousCommandGroupFactory {
         return new SequentialCommandGroup(
                 TurnToFirstStraightaway,
                 TurnToFirstStraightaway2,
-                new ToggleDrivetrainGearCommand(drivetrain),
                 StraightToEndTurn,
                 EndTurn1,
                 EndTurn2,
-                EndTurn3
-                //StraightBack,
-                //new ToggleDrivetrainGearCommand(drivetrain),
-                //FinalTurn1,
-                //FinalTurn2
+                EndTurn2b,
+                EndTurn3b,
+                StraightBack,
+                FinalTurn1
         );
     }
 
@@ -131,14 +133,68 @@ public class AutonomousCommandGroupFactory {
 
         return new SequentialCommandGroup(
                 ForwardFromStartZone,
-                TurnAroundPoint1
-                //          StraightToSecondPoint,
-                //         TurnLeftAroundPoint2,
-                //           StraightToThirdPoint,
-                //          TurnAroundThirdPoint,
-                //          new ToggleDrivetrainGearCommand(drivetrain),
-                //           StraightBackToStartZone
+                TurnAroundPoint1,
+                StraightToSecondPoint,
+                TurnLeftAroundPoint2,
+                StraightToThirdPoint,
+                TurnAroundThirdPoint,
+                new ToggleDrivetrainGearCommand(drivetrain),
+                StraightBackToStartZone
         );
+    }
+    
+    public static SequentialCommandGroup BOUNCE_PATH(DrivetrainSubsystem drivetrain, IntakeSubsystem intake, HopperSubsystem hopper, VisionSubsystem v, ShooterSubsystem shooter) {
+
+            ParallelRaceGroup startTurn = new ParallelRaceGroup(
+                    new VoltageDriveCommand(drivetrain, 0.65, 1),
+                    new WaitCommand(1.0)
+            );
+
+            ParallelRaceGroup driveStraightBack = new ParallelRaceGroup(
+                    new DriveStraightCommand(drivetrain, -0.8, 103),
+                    new WaitCommand(1.5)
+            );
+
+            ParallelRaceGroup turnAroundBack1 = new ParallelRaceGroup(
+                    new VoltageDriveCommand(drivetrain, -1, -0.6),
+                    new WaitCommand(1.0)
+            );
+
+            ParallelRaceGroup backToPoint2 = new ParallelRaceGroup(
+                    new DriveStraightCommand(drivetrain, -1, -90),
+                    new WaitCommand(1.05)
+            );
+
+            ParallelRaceGroup straightAfter2 = new ParallelRaceGroup(
+                    new DriveStraightCommand(drivetrain, 1, -90),
+                    new WaitCommand(1.25)
+            );
+
+            ParallelRaceGroup turnTo3 = new ParallelRaceGroup(
+                    new VoltageDriveCommand(drivetrain, 0.7, 1),
+                    new WaitCommand(1.3)
+            );
+
+            ParallelRaceGroup straightTo3 = new ParallelRaceGroup(
+                    new DriveStraightCommand(drivetrain, 1, 90),
+                    new WaitCommand(1.1)
+            );
+
+            ParallelRaceGroup turnToFinish = new ParallelRaceGroup(
+                    new VoltageDriveCommand(drivetrain, -0.9, -0.6),
+                    new WaitCommand(1.5)
+            );
+
+            return new SequentialCommandGroup(
+                    startTurn,
+                    driveStraightBack,
+                    turnAroundBack1,
+                    backToPoint2,
+                    straightAfter2,
+                    turnTo3,
+                    straightTo3,
+                    turnToFinish
+            );
     }
 
     public static SequentialCommandGroup BARREL_RACING_HIGH(DrivetrainSubsystem drivetrain, IntakeSubsystem intake, HopperSubsystem hopper, VisionSubsystem vision, ShooterSubsystem shooter) {
@@ -620,11 +676,6 @@ public class AutonomousCommandGroupFactory {
                 new RunIntakeCommand(intake, hopper, Constants.Robot.MotorSpeeds.INTAKE_SPEED_FORWARD, Constants.Robot.MotorSpeeds.INTAKE_SQUEEZE_SPEED_FORWARDS, Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT_INTAKE),
                 new WaitCommand(1.2)
         );
-
-//        ParallelRaceGroup finish = new ParallelRaceGroup(
-//                new DriveStraightCommand(drivetrain, 1, 0),
-//                new WaitCommand(1.5)
-//        );
 
         return new SequentialCommandGroup(
                 driveStraight1,
