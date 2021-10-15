@@ -25,7 +25,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  * commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  protected final ControlPanelWheelSubsystem CONTROL_PANEL = new ControlPanelWheelSubsystem();
+//  protected final ControlPanelWheelSubsystem CONTROL_PANEL = new ControlPanelWheelSubsystem();
   protected final DrivetrainSubsystem DRIVE_TRAIN = new DrivetrainSubsystem();
   protected final ClimberSubsystem CLIMBER = new ClimberSubsystem();
   protected final IntakeSubsystem INTAKE = new IntakeSubsystem();
@@ -50,11 +50,11 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    JoystickButton RunControlPanelButton = new JoystickButton(JOYSTICK_OPERATOR, Constants.OI.BUTTON_CONTROL_PANEL);
-    RunControlPanelButton.whileHeld(new RunControlPanelWheelCommand(CONTROL_PANEL, Constants.Robot.MotorSpeeds.CONTROL_PANEL));
-
-    JoystickButton ActuateControlPanel = new JoystickButton(JOYSTICK_OPERATOR, Constants.OI.BUTTON_ACTUATE_CONTROL_PANEL);
-    ActuateControlPanel.whenPressed(new ToggleControlPanelWheelSolenoidCommand(CONTROL_PANEL));
+//    JoystickButton RunControlPanelButton = new JoystickButton(JOYSTICK_OPERATOR, Constants.OI.BUTTON_CONTROL_PANEL);
+//    RunControlPanelButton.whileHeld(new RunControlPanelWheelCommand(CONTROL_PANEL, Constants.Robot.MotorSpeeds.CONTROL_PANEL));
+//
+//    JoystickButton ActuateControlPanel = new JoystickButton(JOYSTICK_OPERATOR, Constants.OI.BUTTON_ACTUATE_CONTROL_PANEL);
+//    ActuateControlPanel.whenPressed(new ToggleControlPanelWheelSolenoidCommand(CONTROL_PANEL));
 
     JoystickButton RunIntakeButton = new JoystickButton(JOYSTICK_OPERATOR,Constants.OI.BUTTON_RUN_INTAKE);
     JoystickButton RunIntakeBackwardsButton = new JoystickButton(JOYSTICK_OPERATOR,Constants.OI.BUTTON_RUN_INTAKE_BACKWARDS);
@@ -68,14 +68,14 @@ public class RobotContainer {
     JoystickButton VisionButton = new JoystickButton(JOYSTICK_DRIVE_LEFT, OI.BUTTON_VISION_ALIGN);
     VisionButton.whileHeld(new DriveWithVisionAlignCommand(VISION, DRIVE_TRAIN, JOYSTICK_DRIVE_LEFT, JOYSTICK_DRIVE_RIGHT, Constants.Robot.Vision.STANDARD_DISTANCE));
 
-    JoystickButton VisionButtonYellow = new JoystickButton(JOYSTICK_DRIVE_RIGHT, OI.BUTTON_YELLOW_ZONE);
-    VisionButtonYellow.whileHeld(new DriveWithVisionAlignCommand(VISION, DRIVE_TRAIN, JOYSTICK_DRIVE_LEFT, JOYSTICK_DRIVE_RIGHT, Constants.Robot.Vision.YELLOW_ZONE_DISTANCE));
-
-    JoystickButton VisionButtonBlue = new JoystickButton(JOYSTICK_DRIVE_RIGHT, OI.BUTTON_BLUE_ZONE);
-    VisionButtonBlue.whileHeld(new DriveWithVisionAlignCommand(VISION, DRIVE_TRAIN, JOYSTICK_DRIVE_LEFT, JOYSTICK_DRIVE_RIGHT, Constants.Robot.Vision.BLUE_ZONE_DISTANCE));
-
-    JoystickButton VisionButtonRed = new JoystickButton(JOYSTICK_DRIVE_RIGHT, OI.BUTTON_RED_ZONE);
-    VisionButtonRed.whileHeld(new DriveWithVisionAlignCommand(VISION, DRIVE_TRAIN, JOYSTICK_DRIVE_LEFT, JOYSTICK_DRIVE_RIGHT, Constants.Robot.Vision.RED_ZONE_DISTANCE));
+//    JoystickButton VisionButtonYellow = new JoystickButton(JOYSTICK_DRIVE_RIGHT, OI.BUTTON_YELLOW_ZONE);
+//    VisionButtonYellow.whileHeld(new DriveWithVisionAlignCommand(VISION, DRIVE_TRAIN, JOYSTICK_DRIVE_LEFT, JOYSTICK_DRIVE_RIGHT, Constants.Robot.Vision.YELLOW_ZONE_DISTANCE));
+//
+//    JoystickButton VisionButtonBlue = new JoystickButton(JOYSTICK_DRIVE_RIGHT, OI.BUTTON_BLUE_ZONE);
+//    VisionButtonBlue.whileHeld(new DriveWithVisionAlignCommand(VISION, DRIVE_TRAIN, JOYSTICK_DRIVE_LEFT, JOYSTICK_DRIVE_RIGHT, Constants.Robot.Vision.BLUE_ZONE_DISTANCE));
+//
+//    JoystickButton VisionButtonRed = new JoystickButton(JOYSTICK_DRIVE_RIGHT, OI.BUTTON_RED_ZONE);
+//    VisionButtonRed.whileHeld(new DriveWithVisionAlignCommand(VISION, DRIVE_TRAIN, JOYSTICK_DRIVE_LEFT, JOYSTICK_DRIVE_RIGHT, Constants.Robot.Vision.RED_ZONE_DISTANCE));
 
 
     JoystickButton HopperContinuousButton = new JoystickButton(JOYSTICK_OPERATOR, Constants.OI.BUTTON_HOPPER_CONTINUOUS);
