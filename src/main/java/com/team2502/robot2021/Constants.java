@@ -101,17 +101,17 @@ public final class Constants {
 
         public static final class Vision {
 
-//          public static final double FRICTION_LOW = .255; // Practice bot
-            public static final double FRICTION_LOW = 0.29; // Comp bot
+            public static final double FRICTION_LOW = .255; // Practice bot
+//          public static final double FRICTION_LOW = 0.29; // Comp bot
 
-//          public static final double FRICTION_HIGH = .27; // Practice Bot
-            public static final double FRICTION_HIGH = 0.452; // Comp Bot
+            public static final double FRICTION_HIGH = .27; // Practice Bot
+//          public static final double FRICTION_HIGH = 0.452; // Comp Bot
 
             public static final double VISION_TURNING_P_LOW = 0.015;
             public static final double VISION_TURNING_P_HIGH = 0.02;
 
-//          public static final String LIMELIGHT_NETWORK_TABLE = "limelight-acid"; // Practice Bot
-            public static final String LIMELIGHT_NETWORK_TABLE = "limelight-orion"; // Comp Bot
+            public static final String LIMELIGHT_NETWORK_TABLE = "limelight-acid"; // Practice Bot
+//          public static final String LIMELIGHT_NETWORK_TABLE = "limelight-orion"; // Comp Bot
 
             public static final double STANDARD_DISTANCE = 12;
             public static final double YELLOW_ZONE_DISTANCE = 9.6;
