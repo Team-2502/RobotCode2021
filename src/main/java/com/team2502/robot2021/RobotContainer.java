@@ -92,6 +92,9 @@ public class RobotContainer {
     JoystickButton RunShooterTrenchButton = new JoystickButton(JOYSTICK_OPERATOR, Constants.OI.BUTTON_RUN_SHOOTER_TRENCH);
     RunShooterTrenchButton.toggleWhenPressed(new RunShooterCommand(SHOOTER,VISION , Constants.LookupTables.DIST_TO_RPM_TABLE.get(25D)));
 
+    JoystickButton RunShooterManualButton = new JoystickButton(JOYSTICK_OPERATOR, Constants.OI.BUTTON_FLYWHEEL_MANUAL); // enable manual with button 11 on operator
+    RunShooterManualButton.toggleWhenPressed(new RunShooterManualCommand(SHOOTER, Constants.Robot.Shooter.SHOOTER_MANUAL_RPM_MID, JOYSTICK_OPERATOR)); // use lever from operator joystick
+
     JoystickButton RunClimberForwardsButton = new JoystickButton(JOYSTICK_OPERATOR, Constants.OI.BUTTON_CLIMBER);
     RunClimberForwardsButton.whileHeld(new RunClimberCommand(CLIMBER, Constants.Robot.MotorSpeeds.CLIMBER_FORWARD));
 

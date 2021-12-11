@@ -51,6 +51,7 @@ public final class Constants {
         public static final int BUTTON_BOTTOM_ROLLER_BACKWARDS = 8;
         public static final int BUTTON_CONTROL_PANEL = 9;
         public static final int BUTTON_ACTUATE_CONTROL_PANEL = 11;
+        public static final int BUTTON_FLYWHEEL_MANUAL = 11;
     }
 
     public static final class RobotMap {
@@ -97,6 +98,7 @@ public final class Constants {
             public static final double SHOOTER_FF = 0.00019;
             public static final double SHOOTER_MAX_OUTPUT = 1;
             public static final double SHOOTER_MIN_OUTPUT = -0.1;
+            public static final double SHOOTER_MANUAL_RPM_MID = 2600; // center of manual range, max is ~4200 with current pid
         }
 
         public static final class Vision {
