@@ -74,6 +74,9 @@ public class RobotContainer {
     JoystickButton VisionButton = new JoystickButton(JOYSTICK_DRIVE_LEFT, OI.BUTTON_VISION_ALIGN);
     VisionButton.whileHeld(new DriveWithVisionAlignCommand(VISION, DRIVE_TRAIN, JOYSTICK_DRIVE_LEFT, JOYSTICK_DRIVE_RIGHT, Constants.Robot.Vision.STANDARD_DISTANCE));
 
+    JoystickButton BallFindButton = new JoystickButton(JOYSTICK_DRIVE_RIGHT, OI.BUTTON_TURN_TO_BALL);
+    BallFindButton.whileHeld(new TurnToBallCommand(VISION, DRIVE_TRAIN, JOYSTICK_DRIVE_LEFT, JOYSTICK_DRIVE_RIGHT, Constants.Robot.Vision.STANDARD_DISTANCE));
+
 //    JoystickButton VisionButtonYellow = new JoystickButton(JOYSTICK_DRIVE_RIGHT, OI.BUTTON_YELLOW_ZONE);
 //    VisionButtonYellow.whileHeld(new DriveWithVisionAlignCommand(VISION, DRIVE_TRAIN, JOYSTICK_DRIVE_LEFT, JOYSTICK_DRIVE_RIGHT, Constants.Robot.Vision.YELLOW_ZONE_DISTANCE));
 //

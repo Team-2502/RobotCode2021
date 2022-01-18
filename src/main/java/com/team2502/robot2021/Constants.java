@@ -32,6 +32,7 @@ public final class Constants {
 //        public static final int BUTTON_BLUE_ZONE = 2;
 //        public static final int BUTTON_YELLOW_ZONE = 3;
 //        public static final int BUTTON_RED_ZONE = 4;
+        public static final int BUTTON_TURN_TO_BALL = 2;
 
         // Buttons on JOYSTICK_DRIVE_LEFT
         public static final int BUTTON_VISION_ALIGN = 1;
