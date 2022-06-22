@@ -26,6 +26,16 @@ public final class Constants {
         public static final int JOYSTICK_DRIVE_RIGHT = 0;
         public static final int JOYSTICK_DRIVE_LEFT = 1;
         public static final int JOYSTICK_OPERATOR = 2;
+        public static final int GROOVY_STICK = 4;
+
+        // Buttons
+
+        // DDR Pad
+        public static final int DDR_START = 10;
+        public static final int DDR_UP = 3;
+        public static final int DDR_DOWN = 2;
+        public static final int DDR_LEFT = 1;
+        public static final int DDR_RIGHT = 4;
 
         // Buttons on JOYSTICK_DRIVE_RIGHT
         public static final int BUTTON_SHIFT = 1;

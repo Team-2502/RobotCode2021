@@ -36,6 +36,7 @@ public class RobotContainer {
   private static final Joystick JOYSTICK_DRIVE_RIGHT = new Joystick(Constants.OI.JOYSTICK_DRIVE_RIGHT);
   private static final Joystick JOYSTICK_DRIVE_LEFT = new Joystick(Constants.OI.JOYSTICK_DRIVE_LEFT);
   private static final Joystick JOYSTICK_OPERATOR = new Joystick(Constants.OI.JOYSTICK_OPERATOR);
+  private static final Joystick GROOVY_STICK = new Joystick(Constants.OI.GROOVY_STICK);
 
     /**
      * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -106,6 +107,9 @@ public class RobotContainer {
 
     JoystickButton RunSqueezeBackwards = new JoystickButton(JOYSTICK_OPERATOR, OI.BUTTON_BOTTOM_ROLLER_BACKWARDS);
     RunSqueezeBackwards.whileHeld(new RunIntakeCommand(INTAKE, HOPPER, 0, Constants.Robot.MotorSpeeds.INTAKE_SQUEEZE_SPEED_BACKWARDS, 0));
+
+    JoystickButton StartDDR = new JoystickButton(GROOVY_STICK, Constants.OI.DDR_START);
+    StartDDR.toggleWhenPressed(new DDRDriveCommand(DRIVE_TRAIN, GROOVY_STICK));
   }
 
   public Command getAutonomousRoutine() {
