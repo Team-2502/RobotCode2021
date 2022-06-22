@@ -50,6 +50,10 @@ public final class Constants {
         // Buttons on JOYSTICK_DRIVE_LEFT
         public static final int BUTTON_VISION_ALIGN = 1;
 
+        // To intake and drive with one person with left joystick
+        public static final int BUTTON_RUN_INTAKE_DRIVER = 3;
+        public static final int BUTTON_RUN_INTAKE_BACKWARDS_DRIVER = 4;
+
         // Buttons on JOYSTICK_OPERATOR
         public static final int BUTTON_HOPPER_CONTINUOUS = 1;
         public static final int BUTTON_HOPPER_CONTINUOUS_REVERSE = 2;
