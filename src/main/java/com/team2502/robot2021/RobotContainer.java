@@ -9,6 +9,7 @@ package com.team2502.robot2021;
 
 import com.team2502.robot2021.command.*;
 import com.team2502.robot2021.command.autonomous.groups.AutonomousCommandGroupFactory;
+import com.team2502.robot2021.command.autonomous.ingredients.ShootAtRPMCommand;
 import com.team2502.robot2021.subsystem.*;
 import com.team2502.robot2021.Constants.OI;
 
@@ -110,6 +111,16 @@ public class RobotContainer {
 
     JoystickButton StartDDR = new JoystickButton(GROOVY_STICK, Constants.OI.DDR_START);
     StartDDR.toggleWhenPressed(new DDRDriveCommand(DRIVE_TRAIN, GROOVY_STICK));
+
+    JoystickButton DDRIntake = new JoystickButton(GROOVY_STICK, Constants.OI.DDR_INTAKE);
+    DDRIntake.toggleWhenPressed(new RunIntakeCommand(INTAKE, HOPPER, Constants.Robot.MotorSpeeds.INTAKE_SPEED_FORWARD, Constants.Robot.MotorSpeeds.INTAKE_SQUEEZE_SPEED_FORWARDS, Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT_INTAKE));
+
+    JoystickButton DDRShoot = new JoystickButton(GROOVY_STICK, Constants.OI.DDR_SHOOT);
+    DDRShoot.whenHeld(new RunHopperCommand(HOPPER, SHOOTER, Constants.Robot.MotorSpeeds.HOPPER_LEFT_BELT, Constants.Robot.MotorSpeeds.HOPPER_RIGHT_BELT, Constants.Robot.MotorSpeeds.HOPPER_EXIT_WHEEL, Constants.Robot.MotorSpeeds.HOPPER_BOTTOM_BELT, false));
+
+    JoystickButton DDRFlywheel = new JoystickButton(GROOVY_STICK, Constants.OI.DDR_FLYWHEEL);
+    DDRFlywheel.toggleWhenPressed(new ShootAtRPMCommand(SHOOTER, 1900D));
+
   }
 
   public Command getAutonomousRoutine() {

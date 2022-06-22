@@ -36,6 +36,10 @@ public final class Constants {
         public static final int DDR_DOWN = 2;
         public static final int DDR_LEFT = 1;
         public static final int DDR_RIGHT = 4;
+        public static final int DDR_INTAKE = 5;
+        public static final int DDR_SHOOT = 6;
+        public static final int DDR_FLYWHEEL = 7;
+        public static final int DDR_TURRET_RIGHT = 8;
 
         // Buttons on JOYSTICK_DRIVE_RIGHT
         public static final int BUTTON_SHIFT = 1;

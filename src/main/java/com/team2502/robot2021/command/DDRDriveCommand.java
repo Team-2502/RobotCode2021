@@ -46,6 +46,6 @@ public class DDRDriveCommand extends CommandBase {
 
 
         
-        drivetrain.getDrive().arcadeDrive(rotationTrapezoidal.calculate(rotation), speedTrapezoidal.calculate(speed));
+        drivetrain.getDrive().arcadeDrive(speedTrapezoidal.calculate(speed), rotationTrapezoidal.calculate(rotation));
     }
 }
