@@ -49,8 +49,8 @@ public final class Constants {
 //        public static final int BUTTON_RED_ZONE = 4;
 
         // Buttons on JOYSTICK_DRIVE_LEFT
-        public static final int BUTTON_VISION_ALIGN = 1;
-        public static final int BUTTON_OUTTAKE = 2;
+        //public static final int BUTTON_VISION_ALIGN = 1;
+        //public static final int BUTTON_OUTTAKE = 2;
 
 
         // Buttons on JOYSTICK_OPERATOR
@@ -66,7 +66,7 @@ public final class Constants {
         public static final int BUTTON_BOTTOM_ROLLER_BACKWARDS = 8;
         public static final int BUTTON_CONTROL_PANEL = 9;
         public static final int BUTTON_ACTUATE_CONTROL_PANEL = 11;
-        public static final int BUTTON_FLYWHEEL_MANUAL = 11;
+        public static final int BUTTON_FLYWHEEL_MANUAL = 2;
     }
 
     public static final class RobotMap {
