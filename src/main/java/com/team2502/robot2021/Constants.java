@@ -52,18 +52,13 @@ public final class Constants {
         public static final int BUTTON_VISION_ALIGN = 1;
         public static final int BUTTON_OUTTAKE = 2;
 
-        // To intake and drive with one person with left joystick
-        public static final int BUTTON_RUN_INTAKE_DRIVER = 3;
-        public static final int BUTTON_RUN_INTAKE_BACKWARDS_DRIVER = 4;
 
         // Buttons on JOYSTICK_OPERATOR
-        public static final int BUTTON_HOPPER_CONTINUOUS = 1;
-        public static final int BUTTON_HOPPER_CONTINUOUS_REVERSE = 2;
+        public static final int BUTTON_HOPPER_CONTINUOUS = 3;
+        public static final int BUTTON_HOPPER_CONTINUOUS_REVERSE = 4;
 
         public static final int BUTTON_RUN_SHOOTER_INIT_LINE = 6;
         public static final int BUTTON_RUN_SHOOTER_TRENCH = 4;
-        public static final int BUTTON_RUN_INTAKE = 5;
-        public static final int BUTTON_RUN_INTAKE_BACKWARDS = 3;
 
         public static final int BUTTON_CLIMBER = 10;
         public static final int BUTTON_CLIMBER_REVERSE = 12;
@@ -71,7 +66,7 @@ public final class Constants {
         public static final int BUTTON_BOTTOM_ROLLER_BACKWARDS = 8;
         public static final int BUTTON_CONTROL_PANEL = 9;
         public static final int BUTTON_ACTUATE_CONTROL_PANEL = 11;
-        public static final int BUTTON_FLYWHEEL_MANUAL = 11;
+        public static final int BUTTON_FLYWHEEL_MANUAL = 2;
     }
 
     public static final class RobotMap {
