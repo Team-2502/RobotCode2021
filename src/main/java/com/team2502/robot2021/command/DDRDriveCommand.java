@@ -4,6 +4,7 @@ import com.team2502.robot2021.subsystem.DrivetrainSubsystem;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj.Timer;
 
 import com.team2502.robot2021.util.KonamiHandler;
 import com.team2502.robot2021.util.KonamiHandler.BUTTONS;
@@ -17,6 +18,7 @@ public class DDRDriveCommand extends CommandBase {
     private Trapezoidal speedTrapezoidal;
     private Trapezoidal rotationTrapezoidal;
     private KonamiHandler konamiHandler;
+    private double lastInputChasm;
 
     public DDRDriveCommand(DrivetrainSubsystem drivetrain, Joystick groovyJoystick) {
         this.drivetrain = drivetrain;
@@ -24,6 +26,7 @@ public class DDRDriveCommand extends CommandBase {
         this.speedTrapezoidal = new Trapezoidal(2);
         this.rotationTrapezoidal = new Trapezoidal(2);
         this.konamiHandler = new KonamiHandler();
+        this.lastInputChasm = Timer.getFPGATimestamp();
 
         addRequirements(drivetrain);
     }
@@ -65,6 +68,15 @@ public class DDRDriveCommand extends CommandBase {
         }
         if (groovyJoystick.getRawButton(Constants.OI.DDR_RIGHT)) {
             rotation = topSpeed;
+        }
+
+        if (speed == 0 && rotation == 0) {
+            lastInputChasm = Timer.getFPGATimestamp();
+        }
+
+        if (Timer.getFPGATimestamp() - lastInputChasm > 1.5) {
+            speed = 0;
+            rotation = 0;
         }
         
         drivetrain.getDrive().arcadeDrive(speedTrapezoidal.calculate(speed), rotationTrapezoidal.calculate(rotation));
